@@ -1,0 +1,40 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/links/adduser" method="POST">
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="paterno" placeholder="Apellido paterno">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="materno" placeholder="Apellido materno">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Perfil</label>
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                <option selected>Perfil...</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Apoyo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block">
+                                Registrar
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
