@@ -15,6 +15,7 @@ DESCRIBE cat_estado_civil;
 
 -- INSERT VALUES TO CAT_ESTADO_CIVIL --
 INSERT INTO `cat_estado_civil` (`ID_ESTADO_CIVIL`, `ESTADO_CIVIL`) VALUES
+  (0, ''),
 	(1, 'INDETERMINADO(A)'),
 	(2, 'SOLTERO(A)'),
 	(3, 'CASADO(A)'),
@@ -41,6 +42,7 @@ DESCRIBE cat_ocupacion;
 
 -- INSERT VALUES TO OCUPACION --
 INSERT INTO `cat_ocupacion` (`ID_OCUPACION`, `OCUPACION`) VALUES
+  (0, ''),
 	(1, 'IDETERMINADO(A)'),
 	(2, 'A. P. E.'),
 	(3, 'DESEMPLEADO'),
@@ -74,7 +76,8 @@ DESCRIBE cat_escolaridad;
 
 -- INSERT VALUES TO CAT_ESCOLARIDAD --
 INSERT INTO `cat_escolaridad` (`ID_ESCOLARIDAD`, `ESCOLARIDAD`) VALUES
-	(1, 'SIN ESTUDIOS'),
+	(0, ''),
+  (1, 'SIN ESTUDIOS'),
 	(2, 'AUTODIDACTA'),
 	(3, 'ANALFABETA'),
 	(4, 'PREESCOLAR'),
@@ -209,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `registro_llamadas` (
   `ID_LLAMADA` int(11) NOT NULL AUTO_INCREMENT,
   `ID_BENEFICIARIO` int(11) NOT NULL,
   `RESULTADO_LLAMADA` ENUM('CONTESTÓ', 'PRIMER INTENTO', 'SEGUNDO INTENTO', 'NO CONTESTÓ') DEFAULT NULL,
-  `CONFIRMACION` ENUM('CONFIRMA ASISTENCIA', 'NO ESTÁ SEGURO', 'NO ASISTE', 'ELIMINAR DE PADRÓN') DEFAULT NULL,
+  `CONFIRMACION` ENUM('', 'CONFIRMA ASISTENCIA', 'NO ESTÁ SEGURO', 'NO ASISTE', 'ELIMINAR DE PADRÓN') DEFAULT NULL,
   `FECHA_LLAMADA` TIMESTAMP NOT NULL DEFAULT current_timestamp,
   `ID_USUARIO` int(10) unsigned NOT NULL,
   
@@ -225,18 +228,3 @@ CREATE TABLE IF NOT EXISTS `registro_llamadas` (
 
 -- DESCRIBE REGISTRO_LLAMADAS --
 describe registro_llamadas;
-
-
-
-
-
-
-
--- ---------------------------------------------------------------------------------- --
-
-
-
-
-
-
-

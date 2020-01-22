@@ -3,7 +3,7 @@
   <table class="table table-hover table-bordered">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">ID</th>
+        <th scope="col">#</th>
         <th scope="col">CURP</th>
         <th scope="col">NOMBRE</th>
         <th scope="col">APELLIDO PATERNO</th>
@@ -11,8 +11,9 @@
         <th scope="col">TELEFONO CASA</th>
         <th scope="col">CELULAR</th>
         <th scope="col">CORREO</th>
-        <th scope="col">PROGRAMA</th>
-        {{!-- <th scope="col">CALLE</th>
+        <th></th>
+        {{!-- <th scope="col">PROGRAMA</th>
+        <th scope="col">CALLE</th>
         <th scope="col"># EXT</th>
         <th scope="col"># INT</th>
         <th scope="col">COLONIA</th>
@@ -44,9 +45,9 @@
             <td>{{ESTADO}}</td>
             <td>{{SEXO}}</td> --}}
             <td>
-              <a href="/links/addcalls/{{ID_BENEFICIARIO}}" class="btn btn-info btn-sm mt-1">Contactar</a>
-              <a href="" class="btn btn-primary btn-sm mt-1">Asistencia</a>
-              <a href="" class="btn btn-success btn-sm mt-1">Entrega</a>
+              <a href="/links/callsbenef/{{ID_BENEFICIARIO}}" class="btn btn-info btn-sm mt-1">Registro llamada</a>
+              <a href="" class="btn btn-primary btn-sm mt-1">Regsitro asistencia</a>
+              <a href="" class="btn btn-success btn-sm mt-1">Regsitro entrega</a>
             </td>
         </tr>
     {{/each}}
