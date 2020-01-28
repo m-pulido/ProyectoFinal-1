@@ -1,0 +1,121 @@
+<div class="container-fluid mt-4 mb-4">
+      <div class="row">
+        <div class="col d-flex justify-content-center ">
+          <h4>Búsqueda de beneficiarios</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7 mx-auto">
+          <form action="/links/searchbenef" method="POST">
+
+            <!-- separador -->
+            <hr>
+            <div class="form-group row">
+              <label for="CURP" class="col-3 col-form-label">CURP</label>
+              <input type="text" class="col-9 form-control rounded-pill" name="CURP" placeholder="CURP" oninput="this.value = this.value.toUpperCase()">
+            </div>
+            <!-- separador -->
+            <hr>
+            <div class="form-group row">
+              <label for="NOMBRE" class="col-3 col-form-label">Nombre(s)</label>
+              <input type="text" class="col-9 form-control rounded-pill" name="NOMBRE" placeholder="Nombre(s)" oninput="this.value = this.value.toUpperCase()">
+            </div>
+
+            <div class="form-group row">
+              <label for="APELLIDO_PATERNO" class="col-3 col-form-label">Apellido Paterno</label>
+              <input type="text" class="col-9 form-control rounded-pill" name="APELLIDO_PATERNO" placeholder="Apellido Paterno" oninput="this.value = this.value.toUpperCase()">
+            </div>
+            <div class="form-group row">
+              <label for="APELLIDO_MATERNO" class="col-3 col-form-label">Apellido Materno</label>
+              <input type="text" class="col-9 form-control rounded-pill" name="APELLIDO_MATERNO" placeholder="Apellido Materno" oninput="this.value = this.value.toUpperCase()">
+            </div>
+
+            <!-- separador -->
+            <hr>
+            <div class="form-group row">
+              <label for="TEL_CASA" class="col-3 col-form-label">Teléfono de casa</label>
+              <input type="text" class="col-9 form-control rounded-pill" name="TEL_CASA" placeholder="Telefono de casa" oninput="this.value = this.value.toUpperCase()">
+            </div>
+
+            <!-- separador -->
+            <hr>
+            <div class="form-group row">
+              <label for="TEL_CELULAR" class="col-3 col-form-label">Teléfono celular</label>
+              <input type="text" class="col-9 form-control rounded-pill" name="TEL_CELULAR" placeholder="Telefono celular" oninput="this.value = this.value.toUpperCase()">
+            </div>
+
+            <!-- separador -->
+            <hr>
+            <div class="form-group row">
+              <label for="CORREO" class="col-3 col-form-label">Correo</label>
+              <input type="email" class="col-9 form-control rounded-pill" name="CORREO" placeholder="Correo">
+            </div>
+
+            <!-- separador -->
+            <hr>
+            <div class="form-group">
+                <button class="btn btn-success">
+                    Buscar
+                </button>
+            </div>
+
+             </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container m-1">
+  <table class="table table-hover table-bordered table-responsive">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">CURP</th>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">APELLIDO PATERNO</th>
+        <th scope="col">APELLIDO MATERNO</th>
+        <th scope="col">TELEFONO CASA</th>
+        <th scope="col">CELULAR</th>
+        <th scope="col">CORREO</th>
+        {{!-- <th scope="col">PROGRAMA</th> --}}
+        {{!-- <th scope="col">CALLE</th>
+        <th scope="col"># EXT</th>
+        <th scope="col"># INT</th>
+        <th scope="col">COLONIA</th>
+        <th scope="col">CODIGO POSTAL</th>
+        <th scope="col">MUNICIPIO</th>
+        <th scope="col">ESTADO</th>
+        <th scope="col">SEXO</th> --}}
+        <th scope="col">ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each listBenef}}
+        <tr>
+            <td class="">{{ID_BENEFICIARIO}}</td>
+            <td>{{CURP}}</td>
+            <td>{{NOMBRE}}</td>
+            <td>{{APELLIDO_PATERNO}}</td>
+            <td>{{APELLIDO_MATERNO}}</td>
+            <td>{{TEL_CASA}}</td>
+            <td>{{TEL_CELULAR}}</td>
+            <td>{{CORREO}}</td>
+            {{!-- <td>{{PROGRAMA}}</td> --}}
+            {{!-- <td>{{CALLE}}</td>
+            <td>{{NUM_EXT}}</td>
+            <td>{{NUM_INT}}</td>
+            <td>{{COLONIA}}</td>
+            <td>{{CODIGO_POSTAL}}</td>
+            <td>{{MUNICIPIO}}</td>
+            <td>{{ESTADO}}</td>
+            <td>{{SEXO}}</td> --}}
+            <td>
+              <a href="/links/modifbenef/{{ID_BENEFICIARIO}}" class="btn btn-info btn-sm mt-1 btn-block">Modificar</a>
+              <a href="/links/addassist/{{ID_BENEFICIARIO}}" class="btn btn-secondary btn-sm mt-1 btn-block">Asistencia</a>
+              <a href="/links/adddelivery/{{ID_BENEFICIARIO}}" class="btn btn-success btn-sm mt-1 btn-block">Entrega</a>
+            </td>
+        </tr>
+    {{/each}}
+  </tbody>
+  </table>
+</div>
