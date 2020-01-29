@@ -50,6 +50,7 @@ router.post('/addbenef', async (req, res) => {
         };
     /* console.log(newBeneficiario); */ // Validates values received
     await pool.query('INSERT INTO beneficiarios set ?', [newBeneficiario]);
+    req.flash('success', 'Beneficiario agregado'); // add message to indicates that a process is done
     res.redirect('/links/listbenef');
 });
 
@@ -121,10 +122,11 @@ router.post('/addcalls/:ID_BENEFICIARIO', async (req, res) => {
     await pool.query('INSERT INTO registro_llamadas set ?', [newCall]);
     // await pool.query('UPDATE registro_llamadas SET RESULTADO_LLAMADA = ?, CONFIRMACION = ? WHERE ID_BENEFICIARIO = ? ORDER BY ID_LLAMADA DESC LIMIT 1', [updateCall.RESULTADO_LLAMADA, updateCall.CONFIRMACION, ID_BENEFICIARIO]); // delete
     /* console.log(ID_BENEFICIARIO, updateBenef, updateCall.RESULTADO_LLAMADA, updateCall.CONFIRMACION); */ // Validates values received for updating tables
+    req.flash('success', 'Llamada registrada');
     res.redirect('/links/listbenef');
 });
 
-// Render the form to add assistance of beneficiaries
+// Render the form to search beneficiaries
 router.get('/searchbenef', (req, res) => {
     res.render('links/searchbenef');
 });
@@ -209,7 +211,8 @@ router.post('/modifbenef/:ID_BENEFICIARIO', async (req, res) => {
         NUM_INT,
         COLONIA,
         CODIGO_POSTAL,
-        SEXO
+        SEXO,
+        ASISTENCIA
     } = req.body;
 
     const updateBenef = {
@@ -229,9 +232,15 @@ router.post('/modifbenef/:ID_BENEFICIARIO', async (req, res) => {
         CODIGO_POSTAL,
         SEXO
     };
+
+    const newAssist = { 
+        ID_BENEFICIARIO,
+        ASISTENCIA
+    };
     /* console.log(updateBenef[0]); */ // Validates values received
     await pool.query('UPDATE beneficiarios set ? WHERE ID_BENEFICIARIO = ?', [updateBenef, ID_BENEFICIARIO]);
-    await pool.query('INSERT INTO registro_asistencias (ID_BENEFICIARIO, ASISTENCIA) VALUES(?, "PRESENTE")', [ID_BENEFICIARIO]);
+    await pool.query('INSERT INTO registro_asistencias set ?', [newAssist]);
+    req.flash('success', 'Beneficiario actualizado y asistencia registrada');
     res.redirect('/links/searchbenef');
 });
 
@@ -255,6 +264,7 @@ router.post('/addassist/:ID_BENEFICIARIO', async (req, res) => {
     };
     /* console.log(ID_BENEFICIARIO, newAsistance); */ // Validates values received
     await pool.query('INSERT INTO registro_asistencias set ?', [newAsistance]);
+    req.flash('success', 'Asistencia registrada');
     res.redirect('/links/searchbenef');
 });
 
@@ -276,8 +286,9 @@ router.post('/adddelivery/:ID_BENEFICIARIO', async (req, res) => {
         ID_BENEFICIARIO,
         ESTATUS_ENTREGA
     };
-    console.log(newDelivery); // Validates values received
+    /* console.log(newDelivery); */ // Validates values received
     await pool.query('INSERT INTO registro_entregas set ?', [newDelivery]);
+    req.flash('success', 'Entrega registrada');
     res.redirect('/links/searchbenef');
 });
 
