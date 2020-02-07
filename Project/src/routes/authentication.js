@@ -11,7 +11,7 @@ router.get('/signup', isNotLoggedIn, (req, res) =>{
 
 // Receive the data to signup 
 router.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
-    successRedirect: '/profile',
+    successRedirect: '/menu',
     failureRedirect: '/signup',
     failureFlash: true
 }));

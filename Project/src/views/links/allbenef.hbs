@@ -1,9 +1,8 @@
-
 <div class="container m-1 mt-5">
   <div class="card">
     <div class="card-body">
-      {{#if confirm}}
-      <p class="card-text text-center">BENEFICIARIOS CONFIRMADOS: {{confirm.CONFIRMACION}}</p>
+      {{#if allBenef}}
+      <p class="card-text text-center">TOTAL DE BENEFICIARIOS REGISTRADOS: {{allBenef.TOTAL_BENEFICIARIOS}}</p>
       {{/if}}
     </div>
   </div>
@@ -30,12 +29,9 @@
         <th scope="col">MUNICIPIO</th>
         <th scope="col">ESTADO</th>
         <th scope="col">SEXO</th> --}}
-          <th scope="col">RESULTADO DE LLAMADA</th>
-          <th scope="col">CONFIRMACION</th>
-          <th scope="col">REGISTRO DE LLAMADA</th>
+        <th scope="col">ACCIONES</th>
       </tr>
     </thead>
-
     <tbody>
       {{#each beneficiarios}}
         <tr>
@@ -56,9 +52,9 @@
             <td>{{MUNICIPIO}}</td>
             <td>{{ESTADO}}</td>
             <td>{{SEXO}}</td> --}}
-            <td>{{RESULTADO_LLAMADA}}</td>
-            <td>{{CONFIRMACION}}</td>
-            <td>{{#if FECHA_LLAMADA}} {{timeago FECHA_LLAMADA}} {{/if}}</td>
+            <td>
+                <a href="/links/addcalls/{{ID_BENEFICIARIO}}" class="btn btn-info btn-sm mt-1">Contactar</a>
+            </td>
         </tr>
     {{/each}}
   </tbody>

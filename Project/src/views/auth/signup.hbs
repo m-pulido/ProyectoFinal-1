@@ -23,6 +23,16 @@
             <div class="form-group">
               <input type="password" class="form-control rounded-pill" name="PASSWORD" placeholder="CONTRASEÑA">
             </div>
+            
+            <div class="form-group">
+              <label for="PERFIL" class="col-3 col-form-label">PERFIL</label>
+                <select class="custom-select my-1 mr-sm-2" name="PERFIL" id="inlineFormCustomSelectPref">
+                    <option selected></option>
+                    <option value="1">ADMINISTRADOR</option>
+                    <option value="2">APOYO</option>
+                </select>
+            </div> 
+
             {{!-- <div class="form-group">
               <input type="password" class="form-control rounded-pill" placeholder="CONFIRMAR CONTRASEÑA">
             </div> --}}
@@ -34,7 +44,7 @@
             <div class="form-group mt-3">
                 <p>
                     ¿Ya tienes cuenta?
-                    <a href="" target="_self">Inicia Sesión</a>
+                    <a href="/signin">Inicia Sesión</a>
                 </p>
             </div>
           </form>

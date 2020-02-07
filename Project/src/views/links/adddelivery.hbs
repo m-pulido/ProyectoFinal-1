@@ -82,7 +82,7 @@
 
             <div class="form-group row">
               <label for="FECHA_ENTREGA" class="col-3 col-form-label">Registro entrega</label>
-              <input type="text" value="{{timeago newLinksDelivery.FECHA_ENTREGA}}" class="col-9 form-control rounded-pill" name="FECHA_ENTREGA_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
+              <input type="text" value="{{#if newLinksDelivery.FECHA_ENTREGA}}{{timeago newLinksDelivery.FECHA_ENTREGA}}{{/if}}" class="col-9 form-control rounded-pill" name="FECHA_ENTREGA_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
             </div>
 
             <!-- separador -->

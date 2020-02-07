@@ -3,14 +3,27 @@ const router = express.Router();
 
 const pool = require('../database'); // Conection to database
 
-const { isLoggedIn } = require('../lib/access');  
+const { isLoggedIn, isAdmin } = require('../lib/access');
+
+// Render all the beneficiaries in list
+router.get('/allbenef', isLoggedIn, async (req, res) => {
+    const beneficiarios = await pool.query('SELECT * FROM beneficiarios');
+    const allBenefs = await pool.query('SELECT COUNT(ID_BENEFICIARIO) AS TOTAL_BENEFICIARIOS FROM beneficiarios');
+    res.render('links/allbenef', { beneficiarios, allBenef: allBenefs[0] });
+});
 
 // Render the list of beneficiarios to add new beneficiaries
+// -----------------------------------------------------------------------------------------
+// "isAdmin" Protects views without permissions 
+// -----------------------------------------------------------------------------------------
 router.get('/addbenef', isLoggedIn, (req, res) => {
     res.render('links/addbenef');
 });
 
 // Receive the new data to add new beneficiaries
+// -----------------------------------------------------------------------------------------
+// "isAdmin" Protects views without permissions 
+// -----------------------------------------------------------------------------------------
 router.post('/addbenef', isLoggedIn, async (req, res) => {
     const { ID_BENEFICIARIO,
             CURP,
@@ -58,9 +71,13 @@ router.post('/addbenef', isLoggedIn, async (req, res) => {
 
 // Render the total of beneficiaries in database
 router.get('/listbenef', isLoggedIn, async (req, res) => {
-    const beneficiarios = await pool.query('SELECT * FROM beneficiarios');
+    /* const beneficiarios = await pool.query('SELECT * FROM beneficiarios'); */
+    /* const registro_llamadas = await pool.query('SELECT * FROM registro_llamadas ORDER BY ID_LLAMADA'); */
+    const beneficiarios = await pool.query('SELECT beneficiarios.ID_BENEFICIARIO, beneficiarios.CURP, beneficiarios.NOMBRE, beneficiarios.APELLIDO_PATERNO, beneficiarios.APELLIDO_MATERNO, beneficiarios.TEL_CASA, beneficiarios.TEL_CELULAR, beneficiarios.CORREO, registro_llamadas.ID_LLAMADA, registro_llamadas.RESULTADO_LLAMADA, registro_llamadas.CONFIRMACION, registro_llamadas.FECHA_LLAMADA FROM beneficiarios LEFT JOIN registro_llamadas ON beneficiarios.ID_BENEFICIARIO = registro_llamadas.ID_BENEFICIARIO WHERE registro_llamadas.ID_LLAMADA = (SELECT MAX(ID_LLAMADA) FROM registro_llamadas WHERE registro_llamadas.ID_BENEFICIARIO = beneficiarios.ID_BENEFICIARIO)');
+    const confirms = await pool.query('SELECT COUNT(CONFIRMACION) AS CONFIRMACION FROM registro_llamadas WHERE CONFIRMACION = "CONFIRMA ASISTENCIA"');
     /* console.log(beneficiarios); */ // Validates values received
-    res.render('links/listbenef', { beneficiarios });
+    /* console.log(confirms[0]); */ // Validates values from COUNT(CONFIRMADOS)
+    res.render('links/listbenef', { beneficiarios, confirm: confirms[0] });
 });
 
 // Render the form to register benefciaries phone calls
@@ -76,6 +93,7 @@ router.get('/addcalls/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
 // Receive the new data to add new phone calls and data of beneficiaries
 router.post('/addcalls/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
     const { ID_BENEFICIARIO } = req.params;
+    const { ID_USUARIO } = req.user;
     const { 
         CURP,
         NOMBRE,
@@ -116,8 +134,11 @@ router.post('/addcalls/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
     const newCall = {
         ID_BENEFICIARIO,
         RESULTADO_LLAMADA,
-        CONFIRMACION
+        CONFIRMACION,
+        ID_USUARIO
     };
+
+    /* console.log(ID_USUARIO); */ // Validates id of user
     /* console.log(ID_BENEFICIARIO, updateBenef, newCall); */ // Validates values received
     await pool.query('UPDATE beneficiarios set ? WHERE ID_BENEFICIARIO = ?', [updateBenef, ID_BENEFICIARIO]);
     await pool.query('INSERT INTO registro_llamadas set ?', [newCall]);
@@ -128,8 +149,10 @@ router.post('/addcalls/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
 });
 
 // Render the form to search beneficiaries
-router.get('/searchbenef', isLoggedIn, (req, res) => {
-    res.render('links/searchbenef');
+router.get('/searchbenef', isLoggedIn, async (req, res) => {
+    const allAssists = await pool.query('SELECT COUNT(ASISTENCIA) AS ASISTENCIA FROM registro_asistencias WHERE ASISTENCIA = "PRESENTE"');
+    const allDeliverys = await pool.query('SELECT COUNT(ESTATUS_ENTREGA) AS ESTATUS_ENTREGA FROM registro_entregas WHERE ESTATUS_ENTREGA = "ENTREGADO"');
+    res.render('links/searchbenef', { allAssist: allAssists[0], allDelivery: allDeliverys[0]});
 });
 
 // Receive the data to initialize a search of beneficiaries
@@ -236,7 +259,7 @@ router.post('/modifbenef/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
 
     const newAssist = { 
         ID_BENEFICIARIO,
-        ASISTENCIA
+        ASISTENCIA,
     };
     /* console.log(updateBenef[0]); */ // Validates values received
     await pool.query('UPDATE beneficiarios set ? WHERE ID_BENEFICIARIO = ?', [updateBenef, ID_BENEFICIARIO]);
@@ -257,11 +280,13 @@ router.get('/addassist/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
 // Receives the new data to add assistance of beneficiaries
 router.post('/addassist/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
     const { ID_BENEFICIARIO } = req.params;
+    const { ID_USUARIO } = req.user;
     const { ASISTENCIA } = req.body;
 
     const newAsistance = {
         ID_BENEFICIARIO,
-        ASISTENCIA
+        ASISTENCIA,
+        ID_USUARIO
     };
     /* console.log(ID_BENEFICIARIO, newAsistance); */ // Validates values received
     await pool.query('INSERT INTO registro_asistencias set ?', [newAsistance]);
@@ -281,11 +306,13 @@ router.get('/adddelivery/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
 // Receives the new data to add a delivery
 router.post('/adddelivery/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
     const { ID_BENEFICIARIO } = req.params;
+    const { ID_USUARIO } = req.user;
     const { ESTATUS_ENTREGA } = req.body;
 
     const newDelivery = {
         ID_BENEFICIARIO,
-        ESTATUS_ENTREGA
+        ESTATUS_ENTREGA,
+        ID_USUARIO
     };
     /* console.log(newDelivery); */ // Validates values received
     await pool.query('INSERT INTO registro_entregas set ?', [newDelivery]);

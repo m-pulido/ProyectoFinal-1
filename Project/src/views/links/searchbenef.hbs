@@ -1,3 +1,24 @@
+<div class="container m-1 mt-2">
+  <div class="card">
+    <div class="card-body">
+      {{#if allAssist}}
+      <p class="card-text text-center">TOTAL DE BENEFICIARIOS PRESENTES: {{allAssist.ASISTENCIA}}</p>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+<div class="container m-1 mt-1">
+  <div class="card">
+    <div class="card-body">
+      {{#if allDelivery}}
+      <p class="card-text text-center">TOTAL DE APOYOS ENTREGADOS: {{allDelivery.ESTATUS_ENTREGA}}</p>
+      {{/if}}
+    </div>
+  </div>
+</div>
+<hr>
+
 <div class="container-fluid mt-4 mb-4">
       <div class="row">
         <div class="col d-flex justify-content-center ">
