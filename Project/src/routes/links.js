@@ -5,6 +5,24 @@ const pool = require('../database'); // Conection to database
 
 const { isLoggedIn, isAdmin } = require('../lib/access');
 
+// Render all the users registered
+router.get('/allusers', isLoggedIn, isAdmin, async (req, res) => {
+    const users = await pool.query('SELECT usuarios.ID_USUARIO, usuarios.NOMBRE, usuarios.APELLIDO_PATERNO, usuarios.CORREO, cat_perfiles.PERFIL FROM usuarios RIGHT JOIN cat_perfiles ON usuarios.ID_PERFIL = cat_perfiles.ID_PERFIL');
+    const allUsers = await pool.query('SELECT COUNT(ID_USUARIO) AS TOTAL_USUARIOS FROM usuarios');
+    res.render('links/allusers', {users, allUser: allUsers[0]});
+});
+
+// Process to delete an user selected
+router.get('/deleteuser/:ID_USUARIO', isLoggedIn, isAdmin, async (req, res) => {
+    const { ID_USUARIO } = req.params;
+    /* console.log(ID_USUARIO); */ // Validates the value received
+    await pool.query('SET FOREIGN_KEY_CHECKS=OFF');
+    await pool.query('DELETE FROM usuarios WHERE ID_USUARIO = ?', [ID_USUARIO]);
+    await pool.query('SET FOREIGN_KEY_CHECKS=ON');
+    req.flash('success', 'Usuario eliminado'); // add message to indicates that a process is done
+    res.redirect('/links/allusers');
+});
+
 // Render all the beneficiaries in list
 router.get('/allbenef', isLoggedIn, async (req, res) => {
     const beneficiarios = await pool.query('SELECT * FROM beneficiarios');

@@ -1,0 +1,40 @@
+<div class="container m-1 mt-5">
+  <div class="card">
+    <div class="card-body">
+      {{#if allUser}}
+      <p class="card-text text-center">TOTAL DE USUARIOS: {{allUser.TOTAL_USUARIOS}}</p>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+<div class="container m-1">
+  <table class="table table-hover table-bordered table-responsive">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">APELLIDO PATERNO</th>
+        <th scope="col">APELLIDO MATERNO</th>
+        <th scope="col">CORREO</th>
+        <th scope="col">PERFIL</th>
+        <th scope="col">ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+        <tr>
+            <td class="">{{ID_USUARIO}}</td>
+            <td>{{NOMBRE}}</td>
+            <td>{{APELLIDO_PATERNO}}</td>
+            <td>{{APELLIDO_MATERNO}}</td>
+            <td>{{CORREO}}</td>
+            <td>{{PERFIL}}</td>
+            <td>
+                <a href="/links/deleteuser/{{ID_USUARIO}}" class="btn btn-danger btn-sm mt-1">Eliminar</a>
+            </td>
+        </tr>
+    {{/each}}
+  </tbody>
+  </table>
+</div>

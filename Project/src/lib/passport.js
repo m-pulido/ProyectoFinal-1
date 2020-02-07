@@ -33,7 +33,8 @@ passport.use('local.signup', new LocalStrategy({
     const { 
         NOMBRE,
         APELLIDO_PATERNO,
-        APELLIDO_MATERNO
+        APELLIDO_MATERNO,
+        ID_PERFIL
      } = req.body;
 
     const newUser = {
@@ -42,6 +43,7 @@ passport.use('local.signup', new LocalStrategy({
         APELLIDO_MATERNO,
         CORREO,
         PASSWORD,
+        ID_PERFIL
     };
     newUser.PASSWORD = await helpers.encryptPassword(PASSWORD);
     const result = await pool.query('INSERT INTO usuarios set ?', [newUser]);
