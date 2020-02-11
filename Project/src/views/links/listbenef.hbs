@@ -21,15 +21,17 @@
         <th scope="col">TELEFONO CASA</th>
         <th scope="col">CELULAR</th>
         <th scope="col">CORREO</th>
-        {{!-- <th scope="col">PROGRAMA</th> --}}
-        {{!-- <th scope="col">CALLE</th>
+        {{#if CALLE}}
+        <th scope="col">PROGRAMA</th>
+        <th scope="col">CALLE</th>
         <th scope="col"># EXT</th>
         <th scope="col"># INT</th>
         <th scope="col">COLONIA</th>
         <th scope="col">CODIGO POSTAL</th>
         <th scope="col">MUNICIPIO</th>
         <th scope="col">ESTADO</th>
-        <th scope="col">SEXO</th> --}}
+        <th scope="col">SEXO</th>
+        {{/if}}
           <th scope="col">RESULTADO DE LLAMADA</th>
           <th scope="col">CONFIRMACION</th>
           <th scope="col">REGISTRO DE LLAMADA</th>
@@ -47,15 +49,17 @@
             <td>{{TEL_CASA}}</td>
             <td>{{TEL_CELULAR}}</td>
             <td>{{CORREO}}</td>
-            {{!-- <td>{{PROGRAMA}}</td> --}}
-            {{!-- <td>{{CALLE}}</td>
+            {{#if CALLE}}
+            <td>{{PROGRAMA}}</td>
+            <td>{{CALLE}}</td>
             <td>{{NUM_EXT}}</td>
             <td>{{NUM_INT}}</td>
             <td>{{COLONIA}}</td>
             <td>{{CODIGO_POSTAL}}</td>
             <td>{{MUNICIPIO}}</td>
             <td>{{ESTADO}}</td>
-            <td>{{SEXO}}</td> --}}
+            <td>{{SEXO}}</td>
+            {{/if}}
             <td>{{RESULTADO_LLAMADA}}</td>
             <td>{{CONFIRMACION}}</td>
             <td>{{#if FECHA_LLAMADA}} {{timeago FECHA_LLAMADA}} {{/if}}</td>

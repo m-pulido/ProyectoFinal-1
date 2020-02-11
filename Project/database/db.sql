@@ -24,7 +24,7 @@ INSERT INTO `cat_perfiles` VALUES
 -- SHOW CAT_PERFILES --
 SELECT * FROM cat_perfiles;
 
--- CREATE PERFILES TABLE --
+-- CREATE USUARIOS TABLE --
 DROP TABLE IF EXISTS `usuarios`;
 
 CREATE TABLE `usuarios` (
@@ -207,7 +207,7 @@ CREATE TABLE `registro_llamadas` (
   CONSTRAINT `FK_registro_llamada_beneficiario` FOREIGN KEY (`ID_BENEFICIARIO`) REFERENCES `beneficiarios` (`ID_BENEFICIARIO`),
   CONSTRAINT `FK_registro_llamada_cat_usuarios` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuarios` (`ID_USUARIO`)
 
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- DESCRIBE REGISTRO_LLAMADAS --
 DESCRIBE registro_llamadas;

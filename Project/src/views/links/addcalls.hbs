@@ -4,10 +4,61 @@
           <h4>Contacto con Beneficiarios</h4>
         </div>
       </div>
+      <hr>
+
+
 
       <div class="row">
         <div class="col-7 mx-auto">
           <form action="/links/addcalls/{{newLinksBenef.ID_BENEFICIARIO}}" method="POST">
+
+            <div class="form-group row">
+              <label for="RESULTADO_LLAMADA" class="col-3 col-form-label">RESULTADO DE LLAMADA</label>
+                <select class="custom-select my-1 mr-sm-2" name="RESULTADO_LLAMADA" id="inlineFormCustomSelectPref">
+                    <option selected></option>
+                    <option value="CONTESTÓ">CONTESTÓ</option>
+                    <option value="PRIMER INTENTO">PRIMER INTENTO</option>
+                    <option value="SEGUNDO INTENTO">SEGUNDO INTENTO</option>
+                    <option value="NO CONTESTÓ">NO CONTESTÓ</option>
+                </select>
+            </div>
+
+            <div class="form-group row">
+              <label for="CONFIRMACION" class="col-3 col-form-label">CONFIRMACION</label>
+                <select class="custom-select my-1 mr-sm-2" name="CONFIRMACION" id="inlineFormCustomSelectPref">
+                    <option selected></option>
+                    <option value="CONFIRMA ASISTENCIA">CONFIRMA ASISTENCIA</option>
+                    <option value="NO ESTÁ SEGURO">NO ESTÁ SEGURO</option>
+                    <option value="NO ASISTE">NO ASISTE</option>
+                    <option value="ELIMINAR DE PADRÓN">ELIMINAR DE PADRÓN</option>
+                </select>
+            </div>    
+
+            <div class="form-group">
+                <button class="btn btn-success">
+                    Registrar cambios
+                </button>
+            </div>
+
+            <hr>
+
+            <div class="form-group row">
+              <label for="RESULTADO_LLAMADA" class="col-3 col-form-label">Resultado de llamada previa</label>
+              <input type="text" value="{{newLinksCalls.RESULTADO_LLAMADA}}" class="col-9 form-control rounded-pill" name="RESULTADO_LLAMADA_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
+            </div>
+
+            <div class="form-group row">
+              <label for="CONFIRMACION" class="col-3 col-form-label">Confirmación</label>
+              <input type="text" value="{{newLinksCalls.CONFIRMACION}}" class="col-9 form-control rounded-pill" name="CONFIRMACION_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
+            </div>
+
+            <div class="form-group row">
+              <label for="FECHA_LLAMADA" class="col-3 col-form-label">Tiempo transcurrido desde última llamada</label>
+              <input type="text" value="{{#if FECHA_LLAMADA}}{{timeago newLinksCalls.FECHA_LLAMADA}}{{/if}}" class="col-9 form-control rounded-pill" name="FECHA_LLAMDA_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
+            </div>
+                        
+            <hr>
+
             <div class="form-group row">
               <label for="CURP" class="col-3 col-form-label">CURP</label>
               <input type="text" value="{{newLinksBenef.CURP}}" class="col-9 form-control rounded-pill" name="CURP" placeholder="CURP" oninput="this.value = this.value.toUpperCase()" readonly>
@@ -77,50 +128,7 @@
                     <option value="HOMBRE">HOMBRE</option>
                 </select>
             </div> --}}
-
-            <div class="form-group row">
-              <label for="RESULTADO_LLAMADA" class="col-3 col-form-label">Resultado de llamada previa</label>
-              <input type="text" value="{{newLinksCalls.RESULTADO_LLAMADA}}" class="col-9 form-control rounded-pill" name="RESULTADO_LLAMADA_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
-            </div>
-
-            <div class="form-group row">
-              <label for="CONFIRMACION" class="col-3 col-form-label">Confirmación</label>
-              <input type="text" value="{{newLinksCalls.CONFIRMACION}}" class="col-9 form-control rounded-pill" name="CONFIRMACION_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
-            </div>
-
-            <div class="form-group row">
-              <label for="FECHA_LLAMADA" class="col-3 col-form-label">Tiempo transcurrido desde última llamada</label>
-              <input type="text" value="{{#if FECHA_LLAMADA}}{{timeago newLinksCalls.FECHA_LLAMADA}}{{/if}}" class="col-9 form-control rounded-pill" name="FECHA_LLAMDA_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
-            </div>
-            
-            <div class="form-group row">
-              <label for="RESULTADO_LLAMADA" class="col-3 col-form-label">RESULTADO DE LLAMADA</label>
-                <select class="custom-select my-1 mr-sm-2" name="RESULTADO_LLAMADA" id="inlineFormCustomSelectPref">
-                    <option selected></option>
-                    <option value="CONTESTÓ">CONTESTÓ</option>
-                    <option value="PRIMER INTENTO">PRIMER INTENTO</option>
-                    <option value="SEGUNDO INTENTO">SEGUNDO INTENTO</option>
-                    <option value="NO CONTESTÓ">NO CONTESTÓ</option>
-                </select>
-            </div>
-
-            <div class="form-group row">
-              <label for="CONFIRMACION" class="col-3 col-form-label">CONFIRMACION</label>
-                <select class="custom-select my-1 mr-sm-2" name="CONFIRMACION" id="inlineFormCustomSelectPref">
-                    <option selected></option>
-                    <option value="CONFIRMA ASISTENCIA">CONFIRMA ASISTENCIA</option>
-                    <option value="NO ESTÁ SEGURO">NO ESTÁ SEGURO</option>
-                    <option value="NO ASISTE">NO ASISTE</option>
-                    <option value="ELIMINAR DE PADRÓN">ELIMINAR DE PADRÓN</option>
-                </select>
-            </div>    
-
-            <div class="form-group">
-                <button class="btn btn-success">
-                    Registrar cambios
-                </button>
-            </div>
-
+                      
              </form>
         </div>
       </div>

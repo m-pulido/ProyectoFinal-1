@@ -31,17 +31,11 @@ router.get('/allbenef', isLoggedIn, async (req, res) => {
 });
 
 // Render the list of beneficiarios to add new beneficiaries
-// -----------------------------------------------------------------------------------------
-// "isAdmin" Protects views without permissions 
-// -----------------------------------------------------------------------------------------
 router.get('/addbenef', isLoggedIn, (req, res) => {
     res.render('links/addbenef');
 });
 
 // Receive the new data to add new beneficiaries
-// -----------------------------------------------------------------------------------------
-// "isAdmin" Protects views without permissions 
-// -----------------------------------------------------------------------------------------
 router.post('/addbenef', isLoggedIn, async (req, res) => {
     const { ID_BENEFICIARIO,
             CURP,
@@ -163,7 +157,7 @@ router.post('/addcalls/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
     // await pool.query('UPDATE registro_llamadas SET RESULTADO_LLAMADA = ?, CONFIRMACION = ? WHERE ID_BENEFICIARIO = ? ORDER BY ID_LLAMADA DESC LIMIT 1', [updateCall.RESULTADO_LLAMADA, updateCall.CONFIRMACION, ID_BENEFICIARIO]); // delete
     /* console.log(ID_BENEFICIARIO, updateBenef, updateCall.RESULTADO_LLAMADA, updateCall.CONFIRMACION); */ // Validates values received for updating tables
     req.flash('success', 'Llamada registrada');
-    res.redirect('/links/listbenef');
+    res.redirect('/links/allbenef');
 });
 
 // Render the form to search beneficiaries

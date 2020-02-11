@@ -8,6 +8,33 @@
       <div class="row">
         <div class="col-7 mx-auto">
           <form action="/links/adddelivery/{{newLinksBenef.ID_BENEFICIARIO}}" method="POST">
+
+            <div class="form-group row">
+              <label for="ESTATUS_ENTREGA" class="col-3 col-form-label">Registrar entrega</label>
+                <select class="custom-select my-1 mr-sm-2" name="ESTATUS_ENTREGA" id="inlineFormCustomSelectPref">
+                    <option selected></option>
+                    <option value="ENTREGADO">ENTREGADO</option>
+                </select>
+            </div>   
+
+            <div class="form-group">
+                <button class="btn btn-success">
+                    Registrar entrega
+                </button>
+            </div>
+            <hr>
+
+            <div class="form-group row">
+              <label for="ESTATUS_ENTREGA" class="col-3 col-form-label">Resultado de entrega</label>
+              <input type="text" value="{{newLinksDelivery.ESTATUS_ENTREGA}}" class="col-9 form-control rounded-pill" name="ESTATUS_ENTREGA_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
+            </div>
+
+            <div class="form-group row">
+              <label for="FECHA_ENTREGA" class="col-3 col-form-label">Registro entrega</label>
+              <input type="text" value="{{#if newLinksDelivery.FECHA_ENTREGA}}{{timeago newLinksDelivery.FECHA_ENTREGA}}{{/if}}" class="col-9 form-control rounded-pill" name="FECHA_ENTREGA_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
+            </div>
+            <hr>
+
             <div class="form-group row">
               <label for="CURP" class="col-3 col-form-label">CURP</label>
               <input type="text" value="{{newLinksBenef.CURP}}" class="col-9 form-control rounded-pill" name="CURP" placeholder="CURP" oninput="this.value = this.value.toUpperCase()" readonly>
@@ -71,34 +98,6 @@
             <div class="form-group row">
               <label for="SEXO" class="col-3 col-form-label">Sexo</label>
               <input type="text" value="{{newLinksBenef.SEXO}}" class="col-9 form-control rounded-pill" name="SEXO" placeholder="SEXO" oninput="this.value = this.value.toUpperCase()" readonly>
-            </div>
-
-            <!-- separador -->
-            <hr>
-            <div class="form-group row">
-              <label for="ESTATUS_ENTREGA" class="col-3 col-form-label">Resultado de entrega</label>
-              <input type="text" value="{{newLinksDelivery.ESTATUS_ENTREGA}}" class="col-9 form-control rounded-pill" name="ESTATUS_ENTREGA_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
-            </div>
-
-            <div class="form-group row">
-              <label for="FECHA_ENTREGA" class="col-3 col-form-label">Registro entrega</label>
-              <input type="text" value="{{#if newLinksDelivery.FECHA_ENTREGA}}{{timeago newLinksDelivery.FECHA_ENTREGA}}{{/if}}" class="col-9 form-control rounded-pill" name="FECHA_ENTREGA_P" placeholder="" oninput="this.value = this.value.toUpperCase()" readonly>
-            </div>
-
-            <!-- separador -->
-            <hr>
-            <div class="form-group row">
-              <label for="ESTATUS_ENTREGA" class="col-3 col-form-label">Registrar entrega</label>
-                <select class="custom-select my-1 mr-sm-2" name="ESTATUS_ENTREGA" id="inlineFormCustomSelectPref">
-                    <option selected></option>
-                    <option value="ENTREGADO">ENTREGADO</option>
-                </select>
-            </div>   
-
-            <div class="form-group">
-                <button class="btn btn-success">
-                    Registrar entrega
-                </button>
             </div>
 
              </form>
