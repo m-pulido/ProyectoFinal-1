@@ -332,5 +332,24 @@ router.post('/adddelivery/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
     res.redirect('/links/searchbenef');
 });
 
+router.get('/dashboard', isLoggedIn, isAdmin, async (req, res) => {
+    const calls = await pool.query('SELECT COUNT(DISTINCT ID_BENEFICIARIO) AS "TOTAL_LLAMADAS" FROM registro_llamadas');
+    const callsAnswer = await pool.query('SELECT COUNT(RESULTADO_LLAMADA) AS "CONTESTARON" FROM registro_llamadas WHERE RESULTADO_LLAMADA = "CONTESTÓ"');
+    const callsNotAnswer = await pool.query('SELECT COUNT(DISTINCT ID_BENEFICIARIO) AS "NO_CONTESTARON" FROM registro_llamadas WHERE RESULTADO_LLAMADA = "NO CONTESTÓ"');
+    const callsAnswerAssist = await pool.query('SELECT COUNT(CONFIRMACION) AS "CONFIRMAN_ASISTENCIA" FROM registro_llamadas WHERE CONFIRMACION = "CONFIRMA ASISTENCIA"');
+    const callsAnswerNotSure = await pool.query('SELECT COUNT(CONFIRMACION) AS "NO_ES_SEGURO" FROM registro_llamadas WHERE CONFIRMACION = "NO ESTÁ SEGURO"');
+    const callsAnswerNotAssist = await pool.query('SELECT COUNT(CONFIRMACION) AS "NO_ASISTEN" FROM registro_llamadas WHERE CONFIRMACION = "NO ASISTE"');
+    const callsAnswerDelete = await pool.query('SELECT COUNT(CONFIRMACION) AS "DAR_DE_BAJA" FROM registro_llamadas WHERE CONFIRMACION = "ELIMINAR DE PADRÓN"');
+
+    res.render('links/dashboard', { totalCall: calls[0],
+                                    callAnswer: callsAnswer[0], 
+                                    callNotAnswer: callsNotAnswer[0],
+                                    callAnswerAssist: callsAnswerAssist[0],
+                                    callAnswerNotSure: callsAnswerNotSure[0],
+                                    callAnswerNotAssist: callsAnswerNotAssist[0],
+                                    callAnswerDelete: callsAnswerDelete[0] 
+                                });
+});
+
 
 module.exports = router;

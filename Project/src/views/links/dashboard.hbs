@@ -1,0 +1,220 @@
+
+<div class="container md-1">
+
+<h4 class="mt-4 text-center">REPORTE DE LLAMADAS REALIZADAS A BENEFICIARIOS</h4>
+<hr>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card bg-light mt-5">
+        <div class="card-body" id="chart-result-calls">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="card bg-light mt-5">
+        <div class="card-body" id="chart-confirm-calls">
+        </div>
+      </div>
+    </div>
+  </div>
+
+    {{!-- <div class="row">
+    <div class="col-sm-12">
+      <div class="card mt-5">
+        <div class="card-body" id="chart-time-assist">
+        </div>
+      </div>
+    </div> --}}
+
+    {{!-- <div class="col-sm-6">
+      <div class="card mt-5">
+        <div class="card-body" id="chart-assists-user">
+        </div>
+      </div>
+    </div>
+  </div> --}}
+
+       <div class="card-body" style="display: none">
+        <div id="value-a">{{callAnswer.CONTESTARON}}</div>
+        <div id="value-b">{{callNotAnswer.NO_CONTESTARON}}</div>
+        <div id="value-c">{{totalCall.TOTAL_LLAMADAS}}</div>
+        <div id="value-d">{{callAnswerAssist.CONFIRMAN_ASISTENCIA}}</div>
+        <div id="value-e">{{callAnswerNotSure.NO_ES_SEGURO}}</div>
+        <div id="value-f">{{callAnswerNotAssist.NO_ASISTEN}}</div>
+        <div id="value-g">{{callAnswerDelete.DAR_DE_BAJA}}</div>
+      </div>
+    
+
+  {{!-- {{#each callByUser}}
+    <div id="value-h">{{LLAMADAS_POR_USUARIO}}</div>
+  {{/each}}
+
+  {{#each assistByUser}}
+    <div id="value-{{ID}}">{{ASISTENCIAS_POR_USUARIO}}</div>
+  {{/each}}
+
+  {{#each username}}
+    <div id="value-j">{{NOMBRE}}</div>
+  {{/each}} --}}
+
+</div>
+
+<script>
+   let CONTESTARON = parseInt(document.querySelector("#value-a").innerText);
+   let NO_CONTESTARON = parseInt(document.querySelector("#value-b").innerText);
+   let TOTAL_LLAMADAS = parseInt(document.querySelector("#value-c").innerHTML);
+
+   let CONFIRMAN_ASISTENCIA = parseInt(document.querySelector("#value-d").innerText);
+   let NO_ES_SEGURO = parseInt(document.querySelector("#value-e").innerText);
+   let NO_ASISTEN = parseInt(document.querySelector("#value-f").innerText);
+   let DAR_DE_BAJA = parseInt(document.querySelector("#value-g").innerText);
+   
+
+        var options1 = {
+          series: [CONTESTARON, NO_CONTESTARON],
+          chart: {
+          width: 465,
+          type: 'pie',
+          },
+          labels: ['CONTESTARON', 'NO CONTESTARON'],
+          responsive: [{
+            breakpoint: 480,
+            options: {
+              chart: {
+              width: 270
+              },
+            legend: {
+              position: 'bottom'
+            }
+            }
+          }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-result-calls"), options1);
+        chart.render();
+
+        var options2 = {
+          series: [CONFIRMAN_ASISTENCIA, NO_ES_SEGURO, NO_ASISTEN, DAR_DE_BAJA],
+          chart: {
+          type: 'donut',
+        },
+        labels: ['CONFIRMAN ASISTENCIA', 'NO ES SEGURO', 'NO ASISTEN', 'DAR DE BAJA'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 270
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-confirm-calls"), options2);
+        chart.render();
+
+        /*var options2 = {
+          series: [{
+          name: '% de beneficiarios contactados',
+          data: [CONFIRMAN_ASISTENCIA, NO_ES_SEGURO, NO_ASISTEN, DAR_DE_BAJA]
+        }],
+          chart: {
+          height: 350,
+          type: 'bar',
+        },
+        plotOptions: {
+          bar: {
+            dataLabels: {
+              position: 'top', // top, center, bottom
+            },
+          }
+        },
+        dataLabels: {
+          enabled: true,
+          formatter: function (val) {
+            return val + "%";
+          },
+          offsetY: -20,
+          style: {
+            fontSize: '12px',
+            colors: ["#304758"]
+          }
+        },
+        
+        xaxis: {
+          categories: ["CONFIRMAN ASISTENCIA", "NO ES SEGURO", "NO ASISTEN", "DAR DE BAJA"],
+          position: 'bottom',
+          labels: {
+            offsetY: 0,
+        
+          },
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false
+          },
+          crosshairs: {
+            fill: {
+              type: 'gradient',
+              gradient: {
+                colorFrom: '#D8E3F0',
+                colorTo: '#BED1E6',
+                stops: [0, 100],
+                opacityFrom: 0.4,
+                opacityTo: 0.5,
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            offsetY: -35,
+        
+          }
+        },
+        fill: {
+          gradient: {
+            shade: 'light',
+            type: "horizontal",
+            shadeIntensity: 0.25,
+            gradientToColors: undefined,
+            inverseColors: true,
+            opacityFrom: 1,
+            opacityTo: 1,
+            stops: [50, 0, 100, 100]
+          },
+        },
+        yaxis: {
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false,
+          },
+          labels: {
+            show: false,
+            formatter: function (val) {
+              return val + "%";
+            }
+          }
+        
+        },
+        title: {
+          text: 'RESULTADO DE LLAMADAS CONTESTADAS',
+          floating: true,
+          offsetY: 320,
+          align: 'center',
+          style: {
+            color: '#444'
+          }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-confirm-calls"), options2);
+        chart.render(); */
+
+
+</script>
