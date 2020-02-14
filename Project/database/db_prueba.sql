@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `NOMBRE` varchar(50) NOT NULL,
   `CORREO` varchar(50) NOT NULL,
   PASSWORD varchar(100) NOT NULL,
-  `ID_PERFIL` int(2) NOT NULL,
+  `ID_PERFIL` int(25) NOT NULL,
   
   PRIMARY KEY (`ID_USUARIO`),
   

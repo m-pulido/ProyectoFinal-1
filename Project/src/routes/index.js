@@ -7,7 +7,14 @@ const { isLoggedIn, isAdmin } = require ('../lib/access');
 router.get('/menu', isLoggedIn, (req, res) => {
     const { ID_PERFIL } = req.user;
     console.log(ID_PERFIL); // Validates values of user profile
-    res.render('menu');
+
+    if(ID_PERFIL === 1) {
+        res.render('menuadmin');
+    }
+    else {
+        res.render('menu');
+    }
+    
 });
 
 module.exports = router;

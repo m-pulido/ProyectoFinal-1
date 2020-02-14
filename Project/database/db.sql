@@ -2,28 +2,6 @@ CREATE DATABASE prueba1;
 
 USE prueba1;
 
--- CREATE CAT_PERFILES --
-DROP TABLE IF EXISTS `cat_perfiles`;
-
-CREATE TABLE `cat_perfiles` (
-  `ID_PERFIL` int(2) NOT NULL,
-  `PERFIL` varchar(20) NOT NULL,
-
-  PRIMARY KEY (`ID_PERFIL`)
-
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- DESCRIBE CAT_PERFILES --
-DESCRIBE cat_perfiles;
-
--- INSERT VALUES TO CAT_PERFILES --
-INSERT INTO `cat_perfiles` VALUES 
-  (1,'ADMINISTRADOR'),
-  (2,'APOYO');
-
--- SHOW CAT_PERFILES --
-SELECT * FROM cat_perfiles;
-
 -- CREATE USUARIOS TABLE --
 DROP TABLE IF EXISTS `usuarios`;
 
@@ -36,11 +14,7 @@ CREATE TABLE `usuarios` (
   `PASSWORD` varchar(100) NOT NULL,
   `ID_PERFIL` int(2) DEFAULT NULL,
 
-  PRIMARY KEY (`ID_USUARIO`),
-
-  KEY `ID_PERFIL_FK` (`ID_PERFIL`) USING BTREE,
-
-  CONSTRAINT `FK_usuarios_cat_perfiles` FOREIGN KEY (`ID_PERFIL`) REFERENCES `cat_perfiles` (`ID_PERFIL`)
+  PRIMARY KEY (`ID_USUARIO`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
