@@ -340,6 +340,8 @@ router.get('/dashboard', isLoggedIn, isAdmin, async (req, res) => {
     const callsAnswerNotSure = await pool.query('SELECT COUNT(CONFIRMACION) AS "NO_ES_SEGURO" FROM registro_llamadas WHERE CONFIRMACION = "NO ESTÁ SEGURO"');
     const callsAnswerNotAssist = await pool.query('SELECT COUNT(CONFIRMACION) AS "NO_ASISTEN" FROM registro_llamadas WHERE CONFIRMACION = "NO ASISTE"');
     const callsAnswerDelete = await pool.query('SELECT COUNT(CONFIRMACION) AS "DAR_DE_BAJA" FROM registro_llamadas WHERE CONFIRMACION = "ELIMINAR DE PADRÓN"');
+    const benefsPresent = await pool.query('SELECT COUNT(ASISTENCIA) AS "PRESENTES" FROM registro_asistencias');
+    const benefs = await pool.query('SELECT COUNT(ID_BENEFICIARIO) AS "TOTAL_DE_BENEFICIARIOS" FROM beneficiarios');
 
     res.render('links/dashboard', { totalCall: calls[0],
                                     callAnswer: callsAnswer[0], 
@@ -347,7 +349,9 @@ router.get('/dashboard', isLoggedIn, isAdmin, async (req, res) => {
                                     callAnswerAssist: callsAnswerAssist[0],
                                     callAnswerNotSure: callsAnswerNotSure[0],
                                     callAnswerNotAssist: callsAnswerNotAssist[0],
-                                    callAnswerDelete: callsAnswerDelete[0] 
+                                    callAnswerDelete: callsAnswerDelete[0],
+                                    benefPresent: benefsPresent[0],
+                                    allBenef: benefs[0]
                                 });
 });
 
