@@ -4,6 +4,23 @@ const router = express.Router();
 const pool = require('../database'); // Conection to database
 
 const { isLoggedIn, isAdmin } = require('../lib/access');
+const { benefValidationRules, validate } = require('../lib/validator');
+
+//modulos para extrer datos de archivos
+const xlsx = require('xlsx');
+const csv = require('csvtojson');
+const converter =csv({
+    nullObject: true
+});
+const fs = require('fs');
+
+//getting files from directory
+const path = require('path');
+
+// variables para subir archivos a base de datos 
+let info = []; 
+let filename = "";
+const temp = './src/files/temp/';
 
 // Render all the users registered
 router.get('/allusers', isLoggedIn, isAdmin, async (req, res) => {
@@ -331,6 +348,225 @@ router.post('/adddelivery/:ID_BENEFICIARIO', isLoggedIn, async (req, res) => {
     req.flash('success', 'Entrega registrada');
     res.redirect('/links/searchbenef');
 });
+
+//vistas para importar datos a db
+
+router.get('/dbimpexp',  isLoggedIn, isAdmin, (req,res) => {
+    info = []; 
+    console.log(info);
+    res.render('links/dbimpexp');
+});
+
+router.post('/dbimpexp', isLoggedIn, isAdmin, (req, res) => {
+    //move the file to the temp folder 
+    if(req.files){
+        const file = req.files.filename;
+        filename = file.name; 
+        file.mv(temp+filename, (err) => {
+            if(err){
+                res.redirect('/dbimpex');
+                req.flash('message', 'El documento no pudo ser cargado correctamente' + err);
+            } else {
+                res.redirect('./confirmdb'); 
+            }
+        });
+        console.log(req.files);
+    }  else {
+        req.flash('message','Favor de seleccionar un archivo a importar.');
+        res.redirect('./dbimpexp');
+    }
+});
+    //preview data before importing it to database 
+router.get('/confirmdb', isLoggedIn, isAdmin, (req,res) => {
+    let ext = path.extname(temp+filename);
+    console.log(ext);
+    if(ext == '.xlsx' || ext == '.xls'){
+        let wb = xlsx.readFile(temp+filename);
+        let sheet = wb.Sheets['Sheet1'];
+        let excel = xlsx.utils.sheet_to_json(sheet);
+
+        for (var i = 0; excel.length > i; i++){
+            
+            info.push([
+                excel[i].CURP.toUpperCase(),
+                excel[i].NOMBRE.toUpperCase(),
+                excel[i].APELLIDO_PATERNO.toUpperCase(),
+                excel[i].APELLIDO_MATERNO.toUpperCase(),
+                excel[i].TEL_CASA.toUpperCase(),
+                excel[i].TEL_CELULAR.toUpperCase(),
+                excel[i].CORREO.toUpperCase(),
+                excel[i].PROGRAMA.toUpperCase(),
+                excel[i].CALLE.toUpperCase(),
+                excel[i].NUM_EXT.toUpperCase(),
+                excel[i].NUM_INT.toUpperCase(),
+                excel[i].COLONIA.toUpperCase(),
+                excel[i].CODIGO_POSTAL.toUpperCase(),
+                excel[i].COLONIA.toUpperCase(),
+                excel[i].ESTADO.toUpperCase(),
+                excel[i].SEXO.toUpperCase()
+            ]);
+        } 
+
+        let data = excel;
+        res.render('links/confirmdb', { data });
+    } else if(ext == '.csv') {
+        
+        csv()
+        .fromFile(temp+filename)
+        .then((jsonObj) => {
+            let keys = Object.getOwnPropertyNames(jsonObj);
+            for (var i = 0; jsonObj.length > i; i++){
+                info.push([
+                    jsonObj[i].CURP.toUpperCase(),
+                    jsonObj[i].NOMBRE.toUpperCase(),
+                    jsonObj[i].APELLIDO_PATERNO.toUpperCase(),
+                    jsonObj[i].APELLIDO_MATERNO.toUpperCase(),
+                    jsonObj[i].TEL_CASA.toUpperCase(),
+                    jsonObj[i].TEL_CELULAR.toUpperCase(),
+                    jsonObj[i].CORREO.toUpperCase(),
+                    jsonObj[i].PROGRAMA.toUpperCase(),
+                    jsonObj[i].CALLE.toUpperCase(),
+                    jsonObj[i].NUM_EXT,
+                    jsonObj[i].NUM_INT,
+                    jsonObj[i].COLONIA.toUpperCase(),
+                    jsonObj[i].CODIGO_POSTAL,
+                    jsonObj[i].MUNICIPIO.toUpperCase(),
+                    jsonObj[i].ESTADO.toUpperCase(),
+                    jsonObj[i].SEXO.toUpperCase()
+                ]);
+                
+            } 
+            let data = jsonObj;
+            console.log(info);
+            res.render('links/confirmdb', { data, keys });
+        })
+    }   else {
+        req.flash('message', 'Hubo un problema al cargar la información desde el archivo cargado.');
+        res.redirect('links/dbimpexp');
+    }
+});
+    //insert data to database
+
+router.post('/confirmdb', isLoggedIn, isAdmin, async (req, res) => {
+    const newPath = './src/files/import/';
+    fs.rename(temp+filename, newPath+filename, function (err) {
+        if (err){
+            throw err 
+        } else {
+            console.log('file moved')
+        }
+    });
+    await pool.query('INSERT INTO beneficiarios (CURP, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, TEL_CASA, TEL_CELULAR, CORREO, PROGRAMA, CALLE, NUM_EXT, NUM_INT, COLONIA,CODIGO_POSTAL, MUNICIPIO, ESTADO, SEXO) VALUES ?',
+                    [info], function (err, result){
+        if(err){
+            res.send('Error ' + err);
+        } else {
+            req.flash('success', 'Informacion agregada a la base datos exitosamente');
+            res.redirect('./dbimpexp');
+        }
+    });   
+});
+// Finalizan vistas para importar archivos
+
+//Vistas para crear respaldo de tabla beneficiarios
+
+
+router.get('/backup',isLoggedIn, isAdmin, async (req,res) =>{
+    const exportPath = './src/files/export/';
+    let today = new Date();
+    let d = today.getDate(),
+        m = today.getMonth()+1,
+        y = today.getFullYear();
+    const date = d + '-' + m + '-'+ y;
+    let n = 0;
+
+    try {
+        //Creacion de archivo excel para respaldo
+        const title = 'Respaldo_v'+(n+1)+'-'+date;
+  
+        let [ databenef, registroLlamadas, registroAsistencia , registroEntregas ] = 
+            await Promise.all([
+                pool.query('SELECT * FROM beneficiarios'), 
+                pool.query('SELECT * FROM registro_llamadas'),
+                pool.query('SELECT * FROM registro_asistencias'),
+                pool.query('SELECT * FROM registro_entregas')
+            ]);
+        let data = databenef;
+        //,   ,
+        let calls = registroLlamadas;
+        let attend = registroAsistencia;
+        let deliver = registroEntregas;
+        
+        let wb = xlsx.utils.book_new();
+        wb.Props = {
+            title: title
+        }
+
+        let ws = xlsx.utils.json_to_sheet(data);
+        let ws2 = xlsx.utils.json_to_sheet(calls);
+        let ws3 = xlsx.utils.json_to_sheet(attend);
+        let ws4 = xlsx.utils.json_to_sheet(deliver);
+
+        xlsx.utils.book_append_sheet(wb, ws, 'Beneficiarios');
+        xlsx.utils.book_append_sheet(wb,ws2, 'Llamadas');
+        xlsx.utils.book_append_sheet(wb,ws3, 'Asistencias');
+        xlsx.utils.book_append_sheet(wb,ws4, 'Entregas');
+
+
+        
+        xlsx.writeFile(wb, title+'.xlsx');
+        //mueve archivo creado a carpeta export 
+        fs.rename('./'+title+'.xlsx', exportPath+title+'.xlsx', function (err) {
+            if (err){
+                throw err 
+            } else {
+                console.log('file moved')
+            }
+        });
+        let res_path = exportPath, 
+        res_name =  title;
+        //inserta path del archivo en base de datos 
+        const newBackUp = {
+            res_path,
+            res_name
+        };
+
+        await pool.query('INSERT INTO rutas_respaldos SET ?', [newBackUp]);
+
+        req.flash('success', 'Base de datos: beneficiarios ha sido respaldada.');
+        res.redirect('./dbimpexp');
+
+    } catch (err) {
+        req.flash('Ocurrio un problema al intentar realizar el respaldo.' + err);
+        res.redirect('./dbimpexp');
+    } 
+    
+});
+//finaliza vistas respaldo 
+
+//Vista para generar descargas de respaldos 
+router.get('/downloads',isLoggedIn, isAdmin,  async (req,res) => {
+
+    const downloads = await pool.query('SELECT * FROM rutas_respaldos');
+
+    res.render('links/downloads', {downloads});
+});
+
+router.post('/downloads', isLoggedIn, isAdmin, async (req, res) => {
+    let items = req.body;
+    items = items.downloadItem;
+    const inputPath = './src/files/export/';
+
+    const item = await pool.query('SELECT res_name FROM rutas_respaldos WHERE id=?', [items]);
+    let title = item[0].res_name;
+    
+    res.download(inputPath+title+'.xlsx', function (err) {
+        console.log(err);
+    });
+});
+
+//finaliza descarga de respaldos
+
 
 router.get('/dashboard', isLoggedIn, isAdmin, async (req, res) => {
     const calls = await pool.query('SELECT COUNT(DISTINCT ID_BENEFICIARIO) AS "TOTAL_LLAMADAS" FROM registro_llamadas');
