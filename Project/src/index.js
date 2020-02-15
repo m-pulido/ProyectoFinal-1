@@ -6,6 +6,11 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const passport = require('passport');
+//To upload files
+const fileUpload = require('express-fileupload');
+//To get value from radio button
+const bodyParser = require('body-parser');
+//To validate data 
 
 const { database } = require('./keys');
 
@@ -38,6 +43,15 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
+//to upload files
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: 'files/temp'
+}));
+    //to use body parser
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // Global variables
 app.use((req, res, next) => {
