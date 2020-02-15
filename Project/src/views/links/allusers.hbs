@@ -1,29 +1,37 @@
-<div class="container m-1 mt-5">
-  <div class="card">
-    <div class="card-body">
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mx-auto text-center">
       {{#if allUser}}
-      <p class="card-text text-center">TOTAL DE USUARIOS: {{allUser.TOTAL_USUARIOS}}</p>
+        <div class="card mt-2">
+          <div class="card-body">
+            <p class="card-text text-center">TOTAL DE USUARIOS: {{allUser.TOTAL_USUARIOS}}</p>
+          </div>
+        </div>
       {{/if}}
     </div>
   </div>
 </div>
 
-<div class="container m-1">
-  <table class="table table-hover table-bordered table-responsive">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">NOMBRE</th>
-        <th scope="col">APELLIDO PATERNO</th>
-        <th scope="col">APELLIDO MATERNO</th>
-        <th scope="col">CORREO</th>
-        <th scope="col">PERFIL</th>
-        <th scope="col">ACCIONES</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each users}}
-        <tr>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table id="table" data-show-columns="true" data-show-columns-toggle-all="true" data-toggle="table"
+        data-height="460" data-pagination="true" data-pagination-h-align="right" data-pagination-detail-h-align="left"
+        data-pagination-loop="false" data-mobile-responsive="true">
+        <thead class="thead-dark">
+          <tr>
+            <th data-sortable="true" scope="col">ID</th>
+            <th data-sortable="true" scope="col">NOMBRE</th>
+            <th data-sortable="true" scope="col">APELLIDO PATERNO</th>
+            <th data-sortable="true" scope="col">APELLIDO MATERNO</th>
+            <th data-sortable="true" scope="col">CORREO</th>
+            <th data-sortable="true" scope="col">PERFIL</th>
+            <th scope="col">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each users}}
+          <tr>
             <td class="">{{ID_USUARIO}}</td>
             <td>{{NOMBRE}}</td>
             <td>{{APELLIDO_PATERNO}}</td>
@@ -31,10 +39,12 @@
             <td>{{CORREO}}</td>
             <td>{{PERFIL}}</td>
             <td>
-                <a href="/links/deleteuser/{{ID_USUARIO}}" class="btn btn-danger btn-sm mt-1">Eliminar</a>
+              <a href="/links/deleteuser/{{ID_USUARIO}}" class="btn btn-danger btn-sm mt-1">Eliminar</a>
             </td>
-        </tr>
-    {{/each}}
-  </tbody>
-  </table>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
