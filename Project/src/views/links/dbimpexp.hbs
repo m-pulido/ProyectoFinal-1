@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col ">
+            <div class="col-md-4 text-center mx-auto " >
+                <div id="accordion">
+                    <div class="card ">
+                        <div class="card-header border-bottom-0" id="headingOne">
+                            <h5 class="mb-0">
+                                <i class=" material-icons">cloud_upload</i>
+                                {{!-- <img class="card-img-top h-25 w-25" src="/img/cargar.svg" alt="icono cargar"> --}}
+                                <div class="card-body">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="color:#1e636d">
+                                        <h5>Cargar base de datos a sistema</h5>
+                                    </button>
+                                </div>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                <h6>Seleccionar archivo</h6>
+                                <form action="/links/dbimpexp" method="POST" enctype="multipart/form-data">
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" name="filename" class="custom-file-input" id="inputGroupfile1"
+                                            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                                            <label class="custom-file-label" for="inputGroupfile1">Seleccionar archivo</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary" type="submit">
+                                                Importar archivo
+                                            </button >
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!--acordion ends -->
+            </div> <!--col-md ends -->
+        </div> <!--col ends -->
+    </div><!--row ends -->
+    <div class="row">
+        <div class="col-md-8 text-center mx-auto">
+            <div class="card-deck">
+                <div class="card mt-4">
+                    <div class="card-header border-bottom-0">
+                        <i class=" material-icons">cloud_download</i>
+                    </div>
+                    <div class="card-body">
+                        <a class="btn btn-link" href="/links/downloads" style="color:#1e636d">
+                            <h5>Descargar respaldo de base de datos.</h5>
+                        </a>
+                    </div>  
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header border-bottom-0">
+                        <i class=" material-icons">restore</i>
+                    </div>
+                    <div class="card-body">
+                        <a class="btn btn-link" href="/links/backup" style="color:#1e636d"><h5>Crear BackUp</h5></a>
+                    </div>
+                </div>            
+            </div> <!--card-deck ends-->
+        </div>  <!--col ends -->  
+    </div> <!--row ends -->
+</div> <!--container ends -->
