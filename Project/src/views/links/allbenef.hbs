@@ -1,25 +1,40 @@
-<div class="container m-1 mt-5">
-  <div class="card">
-    <div class="card-body">
-      {{#if allBenef}}
-      <p class="card-text text-center">TOTAL DE BENEFICIARIOS REGISTRADOS: {{allBenef.TOTAL_BENEFICIARIOS}}</p>
-      {{/if}}
+<div class="container mt-2 ">
+  <div class="row">
+    <div class="col-md-4 text-center mx-auto">
+      <div class="card">
+        <div class="card-body">
+          {{#if allBenef}}
+          <p class="card-text text-center">TOTAL DE BENEFICIARIOS REGISTRADOS: {{allBenef.TOTAL_BENEFICIARIOS}}</p>
+          {{/if}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="container m-1">
-  <table class="table table-hover table-bordered table-responsive">
+<div class="container mb-2">
+  <table 
+    id="table"
+    data-show-columns="true"
+    data-show-columns-toggle-all="true"
+    data-toggle="table"
+    data-height="460"
+    data-pagination="true"
+    data-pagination-h-align="right"
+    data-pagination-detail-h-align="left"
+    data-pagination-loop="false"
+    data-mobile-responsive="true">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">CURP</th>
-        <th scope="col">NOMBRE</th>
-        <th scope="col">APELLIDO PATERNO</th>
-        <th scope="col">APELLIDO MATERNO</th>
-        <th scope="col">TELEFONO CASA</th>
-        <th scope="col">CELULAR</th>
-        <th scope="col">CORREO</th>
+        <th scope="col" >ACCIONES</th>
+        <th scope="col" data-sortable="true">ID</th>
+        <th scope="col"data-sortable="true">CURP</th>
+        <th scope="col" data-sortable="true">NOMBRE</th>
+        <th scope="col" data-sortable="true">APELLIDO PATERNO</th>
+        <th scope="col" data-sortable="true">APELLIDO MATERNO</th>
+        <th scope="col" data-sortable="true">TELEFONO CASA</th>
+        <th scope="col"data-sortable="true">CELULAR</th>
+        <th scope="col" data-sortable="true">CORREO</th>
         {{!-- <th scope="col">PROGRAMA</th> --}}
         {{!-- <th scope="col">CALLE</th>
         <th scope="col"># EXT</th>
@@ -29,12 +44,15 @@
         <th scope="col">MUNICIPIO</th>
         <th scope="col">ESTADO</th>
         <th scope="col">SEXO</th> --}}
-        <th scope="col">ACCIONES</th>
+        
       </tr>
     </thead>
     <tbody>
       {{#each beneficiarios}}
         <tr>
+            <td>
+                <a href="/links/addcalls/{{ID_BENEFICIARIO}}" data-toggle="" class="btn btn-info btn-sm mt-1">Contactar</a>
+            </td>
             <td class="">{{ID_BENEFICIARIO}}</td>
             <td>{{CURP}}</td>
             <td>{{NOMBRE}}</td>
@@ -43,19 +61,9 @@
             <td>{{TEL_CASA}}</td>
             <td>{{TEL_CELULAR}}</td>
             <td>{{CORREO}}</td>
-            {{!-- <td>{{PROGRAMA}}</td> --}}
-            {{!-- <td>{{CALLE}}</td>
-            <td>{{NUM_EXT}}</td>
-            <td>{{NUM_INT}}</td>
-            <td>{{COLONIA}}</td>
-            <td>{{CODIGO_POSTAL}}</td>
-            <td>{{MUNICIPIO}}</td>
-            <td>{{ESTADO}}</td>
-            <td>{{SEXO}}</td> --}}
-            <td>
-                <a href="/links/addcalls/{{ID_BENEFICIARIO}}" class="btn btn-info btn-sm mt-1">Contactar</a>
-            </td>
         </tr>
+
+        
     {{/each}}
   </tbody>
   </table>
