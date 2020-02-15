@@ -14,9 +14,13 @@ CREATE TABLE `usuarios` (
   `PASSWORD` varchar(100) NOT NULL,
   `ID_PERFIL` int(2) DEFAULT NULL,
 
-  PRIMARY KEY (`ID_USUARIO`)
+  PRIMARY KEY (`ID_USUARIO`),
 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `ID_PERFIL_FK` (`ID_PERFIL`) USING BTREE,
+
+  CONSTRAINT `FK_usuarios_cat_perfiles` FOREIGN KEY (`ID_PERFIL`) REFERENCES `cat_perfiles` (`ID_PERFIL`)
+
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- DESCRIBE USUARIOS --
 DESCRIBE usuarios;
@@ -231,3 +235,16 @@ CREATE TABLE `registro_entregas` (
 
 -- DESCRIBE REGISTRO_ENTREGAS --
 DESCRIBE registro_entregas;
+
+-- CREATE RUTAS_RESPALDOS --
+DROP TABLE IF EXISTS `rutas_respaldos`;
+
+CREATE TABLE rutas_respaldos (
+    id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    res_path VARCHAR(100),
+    res_name VARCHAR(150), 
+    created_at timestamp NOT NULL DEFAULT current_timestamp
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- DESCRIBE RUTAS_RESPALDOS --
+DESCRIBE rutas_respaldos;
