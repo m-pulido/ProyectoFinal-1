@@ -1,47 +1,61 @@
-
-<div class="container m-1 mt-5">
-  <div class="card">
-    <div class="card-body">
-      {{#if confirm}}
-      <p class="card-text text-center">BENEFICIARIOS CONFIRMADOS: {{confirm.CONFIRMACION}}</p>
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-md-4 mx-auto text-center">
+    {{#if confirm}}
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text text-center">BENEFICIARIOS CONFIRMADOS: {{confirm.CONFIRMACION}}</p>
+        </div>
+      </div>
       {{/if}}
     </div>
   </div>
 </div>
 
-<div class="container m-1">
-  <table class="table table-hover table-bordered table-responsive">
+<div class="container">
+  <table 
+    id="table"
+    data-show-columns="true"
+    data-show-columns-toggle-all="true"
+    data-toggle="table"
+    data-height="460"
+    data-pagination="true"
+    data-pagination-h-align="right"
+    data-pagination-detail-h-align="left"
+    data-pagination-loop="false"
+    data-mobile-responsive="true">
+
     <thead class="thead-dark">
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">CURP</th>
-        <th scope="col">NOMBRE</th>
-        <th scope="col">APELLIDO PATERNO</th>
-        <th scope="col">APELLIDO MATERNO</th>
-        <th scope="col">TELEFONO CASA</th>
-        <th scope="col">CELULAR</th>
-        <th scope="col">CORREO</th>
-        {{#if CALLE}}
-        <th scope="col">PROGRAMA</th>
-        <th scope="col">CALLE</th>
+        <th scope="col" data-sortable="true">ID</th>
+        <th scope="col" data-sortable="true">RESULTADO DE LLAMADA</th>
+        <th scope="col" data-sortable="true">CONFIRMACION</th>
+        <th scope="col" data-sortable="true">CURP</th>
+        <th scope="col" data-sortable="true">NOMBRE</th>
+        <th scope="col" data-sortable="true">APELLIDO PATERNO</th>
+        <th scope="col" data-sortable="true">APELLIDO MATERNO</th>
+        <th scope="col" data-sortable="true">TELEFONO CASA</th>
+        <th scope="col" data-sortable="true">CELULAR</th>
+        <th scope="col" data-sortable="true">CORREO</th>
+        <th scope="col" data-sortable="true">REGISTRO DE LLAMADA</th>
+        {{!-- <th scope="col">PROGRAMA</th> --}}
+        {{!-- <th scope="col">CALLE</th>
         <th scope="col"># EXT</th>
         <th scope="col"># INT</th>
         <th scope="col">COLONIA</th>
         <th scope="col">CODIGO POSTAL</th>
         <th scope="col">MUNICIPIO</th>
         <th scope="col">ESTADO</th>
-        <th scope="col">SEXO</th>
-        {{/if}}
-          <th scope="col">RESULTADO DE LLAMADA</th>
-          <th scope="col">CONFIRMACION</th>
-          <th scope="col">REGISTRO DE LLAMADA</th>
+        <th scope="col">SEXO</th> --}}
       </tr>
     </thead>
 
     <tbody>
       {{#each beneficiarios}}
         <tr>
-            <td class="">{{ID_BENEFICIARIO}}</td>
+            <td >{{ID_BENEFICIARIO}}</td>
+            <td>{{RESULTADO_LLAMADA}}</td>
+            <td>{{CONFIRMACION}}</td>
             <td>{{CURP}}</td>
             <td>{{NOMBRE}}</td>
             <td>{{APELLIDO_PATERNO}}</td>
@@ -49,20 +63,16 @@
             <td>{{TEL_CASA}}</td>
             <td>{{TEL_CELULAR}}</td>
             <td>{{CORREO}}</td>
-            {{#if CALLE}}
-            <td>{{PROGRAMA}}</td>
-            <td>{{CALLE}}</td>
+            <td>{{#if FECHA_LLAMADA}} {{timeago FECHA_LLAMADA}} {{/if}}</td>
+            {{!-- <td>{{PROGRAMA}}</td> --}}
+            {{!-- <td>{{CALLE}}</td>
             <td>{{NUM_EXT}}</td>
             <td>{{NUM_INT}}</td>
             <td>{{COLONIA}}</td>
             <td>{{CODIGO_POSTAL}}</td>
             <td>{{MUNICIPIO}}</td>
             <td>{{ESTADO}}</td>
-            <td>{{SEXO}}</td>
-            {{/if}}
-            <td>{{RESULTADO_LLAMADA}}</td>
-            <td>{{CONFIRMACION}}</td>
-            <td>{{#if FECHA_LLAMADA}} {{timeago FECHA_LLAMADA}} {{/if}}</td>
+            <td>{{SEXO}}</td> --}}
         </tr>
     {{/each}}
   </tbody>
