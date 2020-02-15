@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Seleccione archivos a descargar:</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table id="table" data-show-columns="true" data-show-columns-toggle-all="true" data-toggle="table"
+                data-height="460" data-pagination="true" data-pagination-h-align="right"
+                data-pagination-detail-h-align="left" data-pagination-loop="false" data-mobile-responsive="true">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            Seleccionar
+                        </th>
+                        <th data-sortable="true" scope="col">Nombre de respaldo</th>
+                        <th data-sortable="true" scope="col">Fecha de creacion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form action="/links/downloads" method="POST">
+                        {{#each downloads}}
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check" value="{{id}}" name="downloadItem"
+                                        id="form-check{{id}}">
+                                    <label class="form-check-label" for="form-check{{id}}"></label>
+                                </div>
+                            </td>
+                            <td>{{res_name}}</td>
+                            <td>{{created_at}}</td>
+                        </tr>
+                        {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="btn-group d-flex justify-content-around">
+
+                <button type="submit" class="btn btn-success">
+                    Descargar
+                </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

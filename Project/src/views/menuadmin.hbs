@@ -1,82 +1,101 @@
 <!--botones menu -->
   {{#if user}}
     <div class="container pt-5 pb-5">
-      <div class="row">
+    <div class="row">
+      <div class="col text-center mx-auto">
         <div class="card-deck text-center">
-
-          <div class="card" >
-            <img class="card-img-top h-25 w-25" src="img/agregar.svg" alt="Card image cap">
+          <div class="card">
+            <div class="card-header border-bottom-0">
+              <i class="material-icons">person_add</i>
+            </div>
             <div class="card-body">
-              <a href="/links/addbenef" style="color:#1e636d"><h5 class="card-title">Agregar Registros</h5></a>
+              <a href="/links/addbenef" style="color:#1e636d">
+                <h5 class="card-title">Agregar registros</h5>
+              </a>
               <p class="card-text">Agregar beneficiarios a la base de datos.</p>
             </div>
           </div>
-
+    
           <div class="card">
-            <img class="card-img-top h-25 w-25" src="" alt="Card image cap">
+            <div class="card-header border-bottom-0">
+              <i class="material-icons">call </i>
+            </div>
             <div class="card-body">
-              <a href="/links/allbenef" style="color:#1e636d"><h5 class="card-title">Contactar a beneficiarios</h5></a>
+              <a href="/links/allbenef" style="color:#1e636d">
+                <h5 class="card-title">Contactar a beneficiarios</h5>
+              </a>
               <p class="card-text">Total de beneficiarios registrados en el padrón </p>
             </div>
           </div>
-
-          <div class="card" >
-            <img class="card-img-top h-25 w-25" src="img/lista.svg" alt="Card image cap">
+          
+          <div class="card">
+            <div class="card-header border-bottom-0">
+              <i class="material-icons">check_circle_outline</i>
+            </div>
             <div class="card-body">
-              <a href="/links/listbenef" style="color:#1e636d"><h5 class="card-title">Validar beneficiarios notificados</h5></a>
+              <a href="/links/searchbenef" style="color:#1e636d">
+                <h5 class="card-title">Registrar asistencia y entrega</h5>
+              </a>
+              <p class="card-text">Registro de asistencia de beneficiarios</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header border-bottom-0">
+              <i class="material-icons">info</i>
+            </div>
+            <div class="card-body">
+              <a href="/links/listbenef" style="color:#1e636d">
+                <h5 class="card-title">Validar beneficiarios notificados</h5>
+              </a>
               <p class="card-text">Enlistar los beneficiarios que han sido contactados.</p>
             </div>
           </div>
+
         </div>
       </div>
     </div>
-
-      <div class="container pt-3 pb-3">
-        <div class="row">
-          <div class="card-deck text-center">
-            <div class="card" >
-              <img class="card-img-top h-25 w-25" src="img/asistencia.svg" alt="Card image cap">
-              <div class="card-body">
-                <a href="/links/searchbenef" style="color:#1e636d"><h5 class="card-title">Registrar asistencia y entrega</h5></a>
-                <p class="card-text">Registro de asistencia de beneficiarios.</p>
-              </div>
-            </div>
-
-            <div class="card" >
-              <img class="card-img-top h-25 w-25" src="img/impexp.svg" alt="Card image cap">
-              <div class="card-body">
-                <a href="/links/files" style="color:#1e636d"><h5 class="card-title" >Importar/Exportar</h5></a>
-                <p class="card-text">Importar o Exportar datos a la base de datos.</p>
-              </div>
-            </div>
-
-            <div class="card" >
-              <img class="card-img-top h-25 w-25" src="img/agregar.svg" alt="Card image cap">
-              <div class="card-body">
-                <a href="/links/allusers" style="color:#1e636d"><h5 class="card-title">Eliminar Usuarios</h5></a>
-                <p class="card-text">Eliminar usuarios de la base de datos.</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-          <div class="container pt-5 pb-5">
-            <div class="row">
-              <div class="card-deck text-center">
-                <div class="card" >
-                  <img class="card-img-top h-25 w-25" src="" alt="Card image cap">
-                  <div class="card-body">
-                    <a href="/links/dashboard" style="color:#1e636d"><h5 class="card-title">Ir a Reporte de Llamadas</h5></a>
-                    <p class="card-text">Reporte de Llamadas a Beneficiarios</p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
+      
+  <div class="row pt-3">
+    <div class="col text-center mx-auto">
+      <div class="card-deck text-center">
         
+
+        <div class="card">
+          <div class="card-header border-bottom-0">
+            <i class="material-icons">import_export</i>
+          </div>
+          <div class="card-body">
+            <a href="/links/dbimpexp" style="color:#1e636d">
+              <h5 class="card-title">Impotar/Exportar</h5>
+            </a>
+            <p class="card-text">Importar o Exportar datos a la base de datos.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header border-bottom-0">
+              <i class="material-icons">assignment_ind</i>
+          </div>
+          <div class="card-body">
+            <a href="/links/allusers" style="color:#1e636d">
+              <h5 class="card-title">Gestión de usuarios</h5>
+            </a>
+            <p class="card-text">Gestiona los usuarios de la base de datos.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header border-bottom-0">
+              <i class="material-icons">pie_chart</i>
+          </div>
+          <div class="card-body">
+            <a href="/links/dashboard" style="color:#1e636d">
+              <h5 class="card-title">Reporte de datos</h5>
+            </a>
+            <p class="card-text">Gráficos con los datos obtenidos.</p>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+  </div>
   {{/if}}    
 <!--botones menu -->

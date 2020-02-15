@@ -10,27 +10,27 @@
           <form action="/links/modifbenef/{{newLinksBenef.ID_BENEFICIARIO}}" method="POST">
             <div class="form-group row">
               <label for="CURP" class="col-3 col-form-label">CURP</label>
-              <input type="text" value="{{newLinksBenef.CURP}}" class="col-9 form-control rounded-pill" name="CURP" placeholder="CURP" oninput="this.value = this.value.toUpperCase()" readonly>
+              <input type="text" value="{{newLinksBenef.CURP}}" class="col-9 form-control rounded-pill" name="CURP" placeholder="CURP"  readonly>
             </div>
             <div class="form-group row">
               <label for="NOMBRE" class="col-3 col-form-label">Nombre(s)</label>
-              <input type="text" value="{{newLinksBenef.NOMBRE}}" class="col-9 form-control rounded-pill" name="NOMBRE" placeholder="Nombre(s)" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" value="{{newLinksBenef.NOMBRE}}" class="col-9 form-control rounded-pill" name="NOMBRE" placeholder="Nombre(s)" >
             </div>
             <div class="form-group row">
               <label for="APELLIDO_PATERNO" class="col-3 col-form-label">Apellido Paterno</label>
-              <input type="text" value="{{newLinksBenef.APELLIDO_PATERNO}}" class="col-9 form-control rounded-pill" name="APELLIDO_PATERNO" placeholder="Apellido Paterno" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" value="{{newLinksBenef.APELLIDO_PATERNO}}" class="col-9 form-control rounded-pill" name="APELLIDO_PATERNO" placeholder="Apellido Paterno" >
             </div>
             <div class="form-group row">
               <label for="APELLIDO_MATERNO" class="col-3 col-form-label">Apellido Materno</label>
-              <input type="text" value="{{newLinksBenef.APELLIDO_MATERNO}}" class="col-9 form-control rounded-pill" name="APELLIDO_MATERNO" placeholder="Apellido Materno" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" value="{{newLinksBenef.APELLIDO_MATERNO}}" class="col-9 form-control rounded-pill" name="APELLIDO_MATERNO" placeholder="Apellido Materno">
             </div>
             <div class="form-group row">
               <label for="TEL_CASA" class="col-3 col-form-label">Teléfono de casa</label>
-              <input type="text" value="{{newLinksBenef.TEL_CASA}}" class="col-9 form-control rounded-pill" name="TEL_CASA" placeholder="Telefono de casa" oninput="this.value = this.value.toUpperCase()">
+              <input type="number" value="{{newLinksBenef.TEL_CASA}}" class="col-9 form-control rounded-pill" name="TEL_CASA" placeholder="Telefono de casa" >
             </div>
             <div class="form-group row">
               <label for="TEL_CELULAR" class="col-3 col-form-label">Teléfono celular</label>
-              <input type="text" value="{{newLinksBenef.TEL_CELULAR}}" class="col-9 form-control rounded-pill" name="TEL_CELULAR" placeholder="Telefono celular" oninput="this.value = this.value.toUpperCase()">
+              <input type="number" value="{{newLinksBenef.TEL_CELULAR}}" class="col-9 form-control rounded-pill" name="TEL_CELULAR" placeholder="Telefono celular">
             </div>
             <div class="form-group row">
               <label for="CORREO" class="col-3 col-form-label">Correo</label>
@@ -38,39 +38,39 @@
             </div>
             <div class="form-group row">
               <label for="PROGRAMA" class="col-3 col-form-label">Programa</label>
-              <input type="text" value="{{newLinksBenef.PROGRAMA}}" class="col-9 form-control rounded-pill" name="PROGRAMA" placeholder="Programa" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" value="{{newLinksBenef.PROGRAMA}}" class="col-9 form-control rounded-pill" name="PROGRAMA" placeholder="Programa">
             </div>
             <div class="form-group row">
               <label for="CALLE" class="col-3 col-form-label">Calle</label>
-              <input type="text" value="{{newLinksBenef.CALLE}}" class="col-9 form-control rounded-pill" name="CALLE" placeholder="Calle" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" value="{{newLinksBenef.CALLE}}" class="col-9 form-control rounded-pill" name="CALLE" placeholder="Calle" >
             </div>
             <div class="form-group row">
               <label for="NUM_EXT" class="col-3 col-form-label">Número exterior</label>
-              <input type="text" value="{{newLinksBenef.NUM_EXT}}" class="col-9 form-control rounded-pill" name="NUM_EXT" placeholder="Número exterior" oninput="this.value = this.value.toUpperCase()">
+              <input type="number" value="{{newLinksBenef.NUM_EXT}}" class="col-9 form-control rounded-pill" name="NUM_EXT" placeholder="Número exterior">
             </div>
             <div class="form-group row">
               <label for="NUM_INT" class="col-3 col-form-label">Número interior</label>
-              <input type="text" value="{{newLinksBenef.NUM_INT}}" class="col-9 form-control rounded-pill" name="NUM_INT" placeholder="Número interior" oninput="this.value = this.value.toUpperCase()">
+              <input type="number" value="{{newLinksBenef.NUM_INT}}" class="col-9 form-control rounded-pill" name="NUM_INT" placeholder="Número interior">
             </div>
             <div class="form-group row">
               <label for="COLONIA" class="col-3 col-form-label">Colonia</label>
-              <input type="text" value="{{newLinksBenef.COLONIA}}" class="col-9 form-control rounded-pill" name="COLONIA" placeholder="Colonia" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" value="{{newLinksBenef.COLONIA}}" class="col-9 form-control rounded-pill" name="COLONIA" placeholder="Colonia">
             </div>
             <div class="form-group row">
               <label for="CODIGO_POSTAL" class="col-3 col-form-label">Código postal</label>
-              <input type="text" value="{{newLinksBenef.CODIGO_POSTAL}}" class="col-9 form-control rounded-pill" name="CODIGO_POSTAL" placeholder="Código postal" oninput="this.value = this.value.toUpperCase()">
+              <input type="number" value="{{newLinksBenef.CODIGO_POSTAL}}" class="col-9 form-control rounded-pill" name="CODIGO_POSTAL" placeholder="Código postal">
             </div>
             <div class="form-group row">
               <label for="MUNICIPIO" class="col-3 col-form-label">Municipio</label>
-              <input type="text" class="col-9 form-control rounded-pill" value="ZAPOPAN" name="MUNICIPIO" placeholder="Municipio" oninput="this.value = this.value.toUpperCase()" readonly>
+              <input type="text" class="col-9 form-control rounded-pill" value="ZAPOPAN" name="MUNICIPIO" placeholder="Municipio" readonly>
             </div>
             <div class="form-group row">
               <label for="ESTADO" class="col-3 col-form-label">Estado</label>
-              <input type="text" class="col-9 form-control rounded-pill" value="JALISCO" name="ESTADO" placeholder="Estado" oninput="this.value = this.value.toUpperCase()" readonly>
+              <input type="text" class="col-9 form-control rounded-pill" value="JALISCO" name="ESTADO" placeholder="Estado"  readonly>
             </div>
             <div class="form-group row">
               <label for="SEXO" class="col-3 col-form-label">Sexo</label>
-                <select class="custom-select my-1 mr-sm-2" name="SEXO" id="inlineFormCustomSelectPref">
+                <select class="col-9 form-control rounded-pill" name="SEXO" id="inlineFormCustomSelectPref">
                     <option selected></option>
                     <option value="SIN ESPECIFICAR">SIN ESPECIFICAR</option>
                     <option value="MUJER">MUJER</option>
@@ -82,19 +82,19 @@
             <hr>
             <div class="form-group row">
               <label for="ASISTENCIA" class="col-3 col-form-label">Registrar asistencia</label>
-                <select class="custom-select my-1 mr-sm-2" name="ASISTENCIA" id="inlineFormCustomSelectPref">
+                <select class="col-9 form-control rounded-pill" name="ASISTENCIA" id="inlineFormCustomSelectPref">
                     <option selected></option>
                     <option value="PRESENTE">PRESENTE</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <button class="btn btn-success">
+            <div class="form-control text-center border-0">
+                <button class="btn btn-info">
                     Modificar beneficiario y registrar asistencia
                 </button>
             </div>
 
-             </form>
+          </form>
         </div>
       </div>
     </div>

@@ -236,15 +236,26 @@ CREATE TABLE `registro_entregas` (
 -- DESCRIBE REGISTRO_ENTREGAS --
 DESCRIBE registro_entregas;
 
+<<<<<<< HEAD
 -- CREATE RUTAS_RESPALDOS --
 DROP TABLE IF EXISTS `rutas_respaldos`;
 
+=======
+-- CREA TABLA DE RUTAS PARA RESPALDOS
+>>>>>>> a9fd78d35af0c6e3302efc8cc2f8d02fc3804761
 CREATE TABLE rutas_respaldos (
     id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     res_path VARCHAR(100),
     res_name VARCHAR(150), 
     created_at timestamp NOT NULL DEFAULT current_timestamp
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- DESCRIBE RUTAS_RESPALDOS --
 DESCRIBE rutas_respaldos;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- DESCRIBE RUTAS_RESPALDOS
+DESCRIBE rutas_respaldos;
+>>>>>>> a9fd78d35af0c6e3302efc8cc2f8d02fc3804761

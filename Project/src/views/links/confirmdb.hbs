@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row mt-3">
+        <div class="col text-center m-2 alert alert-warning">
+            <h2>¿Desea importar los siguientes datos a la base de datos? </h2>
+        </div>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col">
+
+            <table id="table" data-show-columns="true" data-show-columns-toggle-all="true" data-toggle="table"
+                data-height="460" data-pagination="true" data-pagination-h-align="right"
+                data-pagination-detail-h-align="left" data-pagination-loop="false" data-mobile-responsive="true">
+                <thead>
+                    <tr>
+                        <th data-sortable="true" scope="col">CURP</th>
+                        <th data-sortable="true" scope="col">NOMBRE</th>
+                        <th data-sortable="true" scope="col">APELLIDO_PATERNO</th>
+                        <th data-sortable="true" scope="col">APELLIDO_MATERNO</th>
+                        <th data-sortable="true" scope="col">TEL_CASA</th>
+                        <th data-sortable="true" scope="col">TEL_CELULAR</th>
+                        <th data-sortable="true" scope="col">CORREO</th>
+                        <th data-sortable="true" scope="col">PROGRAMA</th>
+                        <th data-sortable="true" scope="col">CALLE</th>
+                        <th data-sortable="true" scope="col">NUM_EXT</th>
+                        <th data-sortable="true" scope="col">NUM_INT</th>
+                        <th data-sortable="true" scope="col">COLONIA</th>
+                        <th data-sortable="true" scope="col">CODIGO_POSTAL</th>
+                        <th data-sortable="true" scope="col">MUNICIPIO</th>
+                        <th data-sortable="true" scope="col">ESTADO</th>
+                        <th data-sortable="true" scope="col">SEXO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each data}}
+                    <tr>
+                        <td>{{this.CURP}}</td>
+                        <td>{{this.NOMBRE}}</td>
+                        <td>{{this.APELLIDO_PATERNO}}</td>
+                        <td>{{this.APELLIDO_MATERNO}}</td>
+                        <td>{{this.TEL_CASA}}</td>
+                        <td>{{this.TEL_CELULAR}}</td>
+                        <td>{{this.CORREO}}</td>
+                        <td>{{this.PROGRAMA}}</td>
+                        <td>{{this.CALLE}}</td>
+                        <td>{{this.NUM_EXT}}</td>
+                        <td>{{this.NUM_INT}}</td>
+                        <td>{{this.COLONIA}}</td>
+                        <td>{{this.CODIGO_POSTAL}}</td>
+                        <td>{{this.MUNICIPIO}}</td>
+                        <td>{{this.ESTADO}}</td>
+                        <td>{{this.SEXO}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col btn-group d-flex justify-content-around">
+            <form action="/links/confirmdb" method="POST">
+                <button type="submit" class="btn btn-success">
+                    Importar datos
+                </button>
+            </form>
+            <div>
+                <a href="/links/dbimpexp" type="button" class="btn btn-danger">Cancelar</a>
+            </div>
+        </div>
+
+    </div>
+</div>

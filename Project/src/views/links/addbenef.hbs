@@ -4,81 +4,92 @@
           <h4>Datos de beneficiario</h4>
         </div>
       </div>
+      {{#if errors}}
+          <div>
+            <span>
+              <i class="material-icons">error_outline</i>
+              <h5>Revise la información de los siguientes campos:</h5>
+            </span>
+          {{#each errors}}
+            <span>{{errors.param}}</span>
+          {{/each}}
+           </div>
+      {{/if}}
+      
       <div class="row">
         <div class="col-7 mx-auto">
           <form action="/links/addbenef" method="POST">
             <div class="form-group row">
               <label for="CURP" class="col-3 col-form-label">CURP</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="CURP" placeholder="CURP" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" class="shadow-input col-9 form-control rounded-pill" name="CURP" placeholder="Ej. SABC560626MJCLRN00" pattern="([A-Z]{4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM](AS|BC|BS|CC|CL|CM|CS|CH|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[A-Z]{3}[0-9A-Z]\d)" required>
             </div>
             <div class="form-group row">
               <label for="NOMBRE" class="col-3 col-form-label">Nombre(s)</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="NOMBRE" placeholder="Nombre(s)" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" pattern="^[a-zA-Z\s]{2,254}" class="shadow-input col-9 form-control rounded-pill" name="NOMBRE" placeholder="Ej. JUAN CARLOS" required>
             </div>
             <div class="form-group row">
               <label for="APELLIDO_PATERNO" class="col-3 col-form-label">Apellido Paterno</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="APELLIDO_PATERNO" placeholder="Apellido Paterno" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" pattern="^[a-zA-Z\s]{2,254}" class="shadow-input col-9 form-control rounded-pill" name="APELLIDO_PATERNO" placeholder="Ej. GONZALEZ"  required>
             </div>
             <div class="form-group row">
               <label for="APELLIDO_MATERNO" class="col-3 col-form-label">Apellido Materno</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="APELLIDO_MATERNO" placeholder="Apellido Materno" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" pattern="^[a-zA-Z\s]{2,254}" class="shadow-input col-9 form-control rounded-pill" name="APELLIDO_MATERNO" placeholder="Ej. ZAMORA" >
             </div>
             <div class="form-group row">
               <label for="TEL_CASA" class="col-3 col-form-label">Teléfono de casa</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="TEL_CASA" placeholder="Telefono de casa" oninput="this.value = this.value.toUpperCase()">
+              <input type="tel" class="shadow-input col-9 form-control rounded-pill" name="TEL_CASA" placeholder="Ej. 38182000 " required>
             </div>
             <div class="form-group row">
               <label for="TEL_CELULAR" class="col-3 col-form-label">Teléfono celular</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="TEL_CELULAR" placeholder="Telefono celular" oninput="this.value = this.value.toUpperCase()">
+              <input type="tel" class="shadow-input col-9 form-control rounded-pill" name="TEL_CELULAR" placeholder="Ej. 3312445589" required>
             </div>
             <div class="form-group row">
               <label for="CORREO" class="col-3 col-form-label">Correo</label>
-              <input type="email" class="col-9 form-control rounded-pill" name="CORREO" placeholder="Correo">
+              <input type="email" class="shadow-input col-9 form-control rounded-pill" name="CORREO" placeholder="Ej. J.ZAMORA@DOMINIO.COM" required>
             </div>
             <div class="form-group row">
               <label for="PROGRAMA" class="col-3 col-form-label">Programa</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="PROGRAMA" placeholder="Programa" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" class="shadow-input col-9 form-control rounded-pill" name="PROGRAMA" placeholder="Ej. ZAPOPAN ¡PRESENTE!" >
             </div>
             <div class="form-group row">
               <label for="CALLE" class="col-3 col-form-label">Calle</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="CALLE" placeholder="Calle" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" class="shadow-input col-9 form-control rounded-pill" name="CALLE" placeholder="Ej. DEL BOSQUE" >
             </div>
             <div class="form-group row">
               <label for="NUM_EXT" class="col-3 col-form-label">Número exterior</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="NUM_EXT" placeholder="Número exterior" oninput="this.value = this.value.toUpperCase()">
+              <input type="number" class="shadow-input col-9 form-control rounded-pill" name="NUM_EXT" placeholder="Ej. 228" >
             </div>
             <div class="form-group row">
               <label for="NUM_INT" class="col-3 col-form-label">Número interior</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="NUM_INT" placeholder="Número interior" oninput="this.value = this.value.toUpperCase()">
+              <input type="number" class="shadow-input col-9 form-control rounded-pill" name="NUM_INT" placeholder="Ej. 11" >
             </div>
             <div class="form-group row">
               <label for="COLONIA" class="col-3 col-form-label">Colonia</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="COLONIA" placeholder="Colonia" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" class="shadow-input col-9 form-control rounded-pill" name="COLONIA" placeholder="Ej. AUDITORIO" >
             </div>
             <div class="form-group row">
               <label for="CODIGO_POSTAL" class="col-3 col-form-label">Código postal</label>
-              <input type="text" class="col-9 form-control rounded-pill" name="CODIGO_POSTAL" placeholder="Código postal" oninput="this.value = this.value.toUpperCase()">
+              <input type="number" class="shadow-input col-9 form-control rounded-pill" name="CODIGO_POSTAL" placeholder="Ej. 45030" >
             </div>
             <div class="form-group row">
               <label for="MUNICIPIO" class="col-3 col-form-label">Municipio</label>
-              <input type="text" class="col-9 form-control rounded-pill" value="ZAPOPAN" name="MUNICIPIO" placeholder="Municipio" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" disabled class="shadow-input col-9 form-control rounded-pill" value="ZAPOPAN" name="MUNICIPIO">
             </div>
             <div class="form-group row">
               <label for="ESTADO" class="col-3 col-form-label">Estado</label>
-              <input type="text" class="col-9 form-control rounded-pill" value="JALISCO" name="ESTADO" placeholder="Estado" oninput="this.value = this.value.toUpperCase()">
+              <input type="text" disabled class="shadow-input col-9 form-control rounded-pill" value="JALISCO" name="ESTADO" >
             </div>
             <div class="form-group row">
               <label for="SEXO" class="col-3 col-form-label">Sexo</label>
-                <select class="custom-select my-1 mr-sm-2" name="SEXO" id="inlineFormCustomSelectPref">
-                    <option selected></option>
-                    <option value="SIN ESPECIFICAR">SIN ESPECIFICAR</option>
+                <select class="shadow-input col-9 form-control rounded-pill" name="SEXO" id="inlineFormCustomSelectPref">
+                    <option class="rounded-pill" selected></option>
+                    <option  value="SIN ESPECIFICAR">SIN ESPECIFICAR</option>
                     <option value="MUJER">MUJER</option>
                     <option value="HOMBRE">HOMBRE</option>
                 </select>
             </div>
-
-            <div class="form-group">
-                <button class="btn btn-success">
+            <div class=" form-control text-center border-0">
+                <button class="btn btn-info">
                     Registrar
                 </button>
             </div>
