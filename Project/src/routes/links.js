@@ -364,16 +364,16 @@ router.post('/dbimpexp', isLoggedIn, isAdmin, (req, res) => {
         filename = file.name; 
         file.mv(temp+filename, (err) => {
             if(err){
-                res.redirect('/dbimpex');
+                res.redirect('links/dbimpex');
                 req.flash('message', 'El documento no pudo ser cargado correctamente' + err);
             } else {
-                res.redirect('./confirmdb'); 
+                res.redirect('links/confirmdb'); 
             }
         });
         console.log(req.files);
     }  else {
         req.flash('message','Favor de seleccionar un archivo a importar.');
-        res.redirect('./dbimpexp');
+        res.redirect('links/dbimpexp');
     }
 });
     //preview data before importing it to database 
