@@ -5,15 +5,15 @@
 <hr>
   <div class="row">
     <div class="col-sm-6">
-      <div class="card bg-light mt-5">
-        <div class="card-body" id="chart-result-calls">
+      <div class="mt-5">
+        <div id="chart-result-calls">
         </div>
       </div>
     </div>
 
     <div class="col-sm-6">
-      <div class="card bg-light mt-5">
-        <div class="card-body" id="chart-confirm-calls">
+      <div class="mt-5">
+        <div id="chart-confirm-calls">
         </div>
       </div>
     </div>
@@ -21,8 +21,8 @@
 
     <div class="row">
     <div class="col-sm-12">
-      <div class="card mt-5">
-        <div class="card-body" id="chart-assist-confirm">
+      <div class="mt-5">
+        <div id="chart-assist-confirm">
         </div>
       </div>
     </div>
@@ -58,21 +58,20 @@
         var options1 = {
           series: [CONTESTARON, NO_CONTESTARON],
           chart: {
-          width: 465,
-          type: 'pie',
-          },
-          labels: ['CONTESTARON', 'NO CONTESTARON'],
-          responsive: [{
-            breakpoint: 480,
-            options: {
-              chart: {
+          type: 'donut',
+        },
+        labels: ['CONTESTARON', 'NO CONTESTARON'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
               width: 270
-              },
+            },
             legend: {
               position: 'bottom'
             }
-            }
-          }]
+          }
+        }]
         };
 
         var chart = new ApexCharts(document.querySelector("#chart-result-calls"), options1);
@@ -102,100 +101,34 @@
 
         var options3 = {
           series: [{
-          name: 'beneficiarios',
           data: [TOTAL_DE_BENEFICIARIOS, CONFIRMAN_ASISTENCIA, PRESENTES]
         }],
           chart: {
-          height: 350,
           type: 'bar',
+          height: 350
         },
         plotOptions: {
           bar: {
-            dataLabels: {
-              position: 'top', // top, center, bottom
-            },
+            horizontal: true,
           }
         },
         dataLabels: {
-          enabled: true,
-          formatter: function (val) {
-            return val;
-          },
-          offsetY: -20,
-          style: {
-            fontSize: '12px',
-            colors: ["#304758"]
-          }
+          enabled: false
         },
-        
         xaxis: {
           categories: ["TOTAL BENEFICIARIOS", "CONFIRMAN ASISTENCIA", "PRESENTES"],
-          position: 'top',
-          labels: {
-            offsetY: -22,
-        
-          },
-          axisBorder: {
-            show: false
-          },
-          axisTicks: {
-            show: false
-          },
-          crosshairs: {
-            fill: {
-              type: 'gradient',
-              gradient: {
-                colorFrom: '#D8E3F0',
-                colorTo: '#BED1E6',
-                stops: [0, 100],
-                opacityFrom: 0.4,
-                opacityTo: 0.5,
-              }
-            }
-          },
-          tooltip: {
-            enabled: true,
-            offsetY: -35,
-        
-          }
         },
-        fill: {
-          gradient: {
-            shade: 'light',
-            type: "horizontal",
-            shadeIntensity: 0.25,
-            gradientToColors: undefined,
-            inverseColors: true,
-            opacityFrom: 1,
-            opacityTo: 1,
-            stops: [50, 0, 100, 100]
-          },
-        },
-        yaxis: {
-          axisBorder: {
-            show: false
-          },
-          axisTicks: {
-            show: false,
-          },
-          labels: {
-            show: false,
-            formatter: function (val) {
-              return val;
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 270
+            },
+            legend: {
+              position: 'bottom'
             }
           }
-        
-        },
-        title: {
-          text: '',
-          position: "bottom",
-          floating: true,
-          offsetY: 320,
-          align: 'center',
-          style: {
-            color: '#444'
-          }
-        }
+        }]
         };
 
         var chart = new ApexCharts(document.querySelector("#chart-assist-confirm"), options3);

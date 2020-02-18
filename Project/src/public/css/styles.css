@@ -1,11 +1,20 @@
+.navbar {
+    height: 6em;
+    background-color: #1e636d;
+}
+
+.navbar-brand {
+    font-family: CanaroW00-Semibold;
+}
+
 .footer {
-    position : fixed;
+    margin-top: 5em;
     bottom: 0;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     width: 100%;
-    height: 60px;
-    line-height: 60px;
-    background-color:#f5f5f5;
+  /*   height: 60px; */
+   /*  line-height: 60px; */
+    background:#eaeaea;
 }
 
 .btn-info{
@@ -18,17 +27,17 @@
 }
 body {
    margin-bottom: 100px;
+   font-family: 'Titillium Web', sans-serif;
 }
 
 .logo {
     position: absolute;
     height: 3em;
     width: auto;
-    top: 0.2em;
-    left: 0.5em;
+    top: 0.7em;
+    left: 0.7em;
     content: url('/img/logo.png');
 }
-
 
 .card{
     background-color: white;
@@ -57,3 +66,15 @@ input{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
 }
+
+.badge {
+    font-family: CanaroW00-Semibold
+}
+
+@import url(//db.onlinewebfonts.com/c/f78bcde21d874130c88de04c43f1cda4?family=CanaroW00-SemiBold);
+
+h2, h3, h4, h5, h6 {
+    font-family: CanaroW00-Semibold;
+}
+
+@font-face {font-family: "CanaroW00-SemiBold"; src: url("//db.onlinewebfonts.com/t/f78bcde21d874130c88de04c43f1cda4.eot"); src: url("//db.onlinewebfonts.com/t/f78bcde21d874130c88de04c43f1cda4.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/f78bcde21d874130c88de04c43f1cda4.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/f78bcde21d874130c88de04c43f1cda4.woff") format("woff"), url("//db.onlinewebfonts.com/t/f78bcde21d874130c88de04c43f1cda4.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/f78bcde21d874130c88de04c43f1cda4.svg#CanaroW00-SemiBold") format("svg"); }

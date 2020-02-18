@@ -1,4 +1,4 @@
-module.exports = {
+/* module.exports = {
 
     database: {
         host: 'localhost',
@@ -7,9 +7,9 @@ module.exports = {
         database: 'prueba1'
     }
 
-}
+} */
 
-/* module.exports = {
+module.exports = {
 
     database: {
         host: 'localhost',
@@ -17,6 +17,6 @@ module.exports = {
         password: '3l3ctroQuimica_2',
         database: 'prueba1'
     }
-} */
+}
 
 // Change the port according the database server (default MYSQL: 3306)
