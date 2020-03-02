@@ -11,4 +11,10 @@ Para poder acceder a la plataforma es necesario crear un usuario y contraseña. 
 Una vez dentro el menú muestra las diversas opciones de acciones que se pueden realizar. 
 La plataforma cuenta con un diseño responsivo por lo que puede ser utilizada en diversos dispositivos. 
 
+Tecnologías utilizadas: 
+
+Para la creación del proyecto se utlilizo JavaScript en conjunto con NodeJS y Express.
+La parte de Front-end fue realizada con handlebars, css, y bootstrap. 
+Finalmente, la base de datos utilizada fue en MySQL Server.
+
 
